@@ -73,3 +73,17 @@ def load_spoke(filename='spoke.csv'):
     edge_matrix = to_sparse(nodes, edges)
     io.mmwrite('spoke.mtx', edge_matrix)
     return nodes, edges, node_types, edge_types, edge_matrix
+
+def symmetrize_matrix(matrix):
+    """
+    Returns a dok matrix that is symmetric and a copy of matrix.
+    Takes the larger of two values if a pair is already symmetric.
+    """
+    matrix_copy = sparse.dok_array(matrix)
+    ind1, ind2 = matrix.nonzero()
+    for i, j in zip(ind1, ind2):
+        if matrix_copy[j, i]:
+            matrix_copy[j, i] = max(matrix[j, i], matrix[i, j])
+        else:
+            matrix_copy[j, i] = matrix[i, j]
+    return matrix_copy
