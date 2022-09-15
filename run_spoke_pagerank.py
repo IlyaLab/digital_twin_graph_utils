@@ -22,6 +22,7 @@ if __name__ == '__main__':
     pr_probs_topic = pagerank_sparse.topic_pagerank(edge_matrix, topics, modify_matrix=False, resid=0.85, topic_prob=0.15, n_iters=50)
     np.savetxt('pr_topics_spoke.txt', pr_probs_topic.flatten())
     topics_sorted = pr_probs_topic.flatten().argsort()[::-1]
+    top_topic_nodes = [nodes[i] + (pr_probs_topic[i],) for i in topics_sorted[:50]]
     top_topic_genes = [nodes[i] + (pr_probs_topic[i],) for i in topics_sorted[:200] if nodes[i][2]==1]
     top_topic_compounds = [nodes[i] + (pr_probs_topic[i],) for i in topics_sorted[:1000] if nodes[i][2]==5]
     top_topic_diseases = [nodes[i] + (pr_probs_topic[i],) for i in topics_sorted[:1000] if nodes[i][2]==9]

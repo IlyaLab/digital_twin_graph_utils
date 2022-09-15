@@ -127,9 +127,78 @@ Edge type counts:
  35: 43973}
 
 
-Timing: 5min 54s to load graph and run pagerank three times
+Timing:
 2min 24s to load graph
 4.65 s to run pagerank on graph
-The most costly operation is actually symmetrize_matrix, which takes 3min 7s. This is probably being done in a very inefficient way.
+2min 54s total
 
-Update: 2min 54s total
+Some pagerank results:
+Highest pagerank nodes:
+['GBB1_HUMAN',
+ 'AKT1_HUMAN',
+ 'POTEE_HUMAN',
+ 'MYC_HUMAN',
+ 'CCR3_HUMAN',
+ 'FPR2_HUMAN',
+ 'BKRB2_HUMAN',
+ 'CCL5_HUMAN',
+ 'DRD2_HUMAN',
+ 'CNR2_HUMAN',
+ 'CCL4_HUMAN',
+ 'CC4L_HUMAN',
+ 'LPAR2_HUMAN',
+ 'ADA2B_HUMAN',
+ 'KCNH2_HUMAN',
+ 'SSR3_HUMAN',
+ 'TNFA_HUMAN',
+ 'THRB_HUMAN',
+ 'FPR1_HUMAN',
+ 'FA10_HUMAN',
+ 'PGH2_HUMAN',
+ 'AA2AR_HUMAN',
+...]
+
+Highest pagerank nodes with 'type 2 diabetes mellitus' as a topic:
+['type 2 diabetes mellitus',
+ 'multicellular organism',
+ 'larva',
+ 'structure with developmental contribution from neural crest',
+ 'organism subdivision',
+ 'mesoderm-derived structure',
+ 'ectoderm-derived structure',
+ 'caudal fin',
+ 'anatomical system',
+ 'adult organism',
+ 'subdivision of organism along main body axis',
+ 'neural crest-derived structure',
+ 'UBC',
+ 'regional part of brain',
+ 'organ part',
+ 'POTEE_HUMAN',
+ 'multicellular anatomical structure',
+ 'subdivision of head',
+ 'lateral structure',
+...]
+
+
+Highest pagerank nodes with 'type 2 diabetes mellitus' as a topic, after symmetrizing the SPOKE adjacency matrix:
+['type 2 diabetes mellitus',
+ 'disease',
+ 'brain',
+ 'cancer',
+ 'testis',
+ 'disease of cellular proliferation',
+ 'liver',
+ 'adrenal gland',
+ 'heart',
+ 'lung',
+ 'diabetes mellitus',
+ 'carcinoma',
+ 'disease of anatomical entity',
+ 'cell type cancer',
+ 'cerebellum',
+ 'adipose tissue',
+ 'prostate gland',
+ 'lymph node',
+ 'blood',
+...]
