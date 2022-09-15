@@ -32,6 +32,7 @@ if __name__ == '__main__':
     pr_probs_topic_symmetric = pagerank_sparse.topic_pagerank(edge_matrix_symmetric, topics, modify_matrix=False, resid=0.85, topic_prob=0.15, n_iters=50)
     np.savetxt('pr_topics_spoke_symmetric.txt', pr_probs_topic_symmetric.flatten())
     topics_sorted = pr_probs_topic_symmetric.flatten().argsort()[::-1]
+    top_topic_nodes_pr = [nodes[i] + (pr_probs_topic_symmetric[i],) for i in topics_sorted[:50]]
     top_topic_genes = [nodes[i] + (pr_probs_topic_symmetric[i],) for i in topics_sorted[:400] if nodes[i][2]==1]
     top_topic_compounds = [nodes[i] + (pr_probs_topic_symmetric[i],) for i in topics_sorted[:2000] if nodes[i][2]==5]
     top_topic_diseases = [nodes[i] + (pr_probs_topic_symmetric[i],) for i in topics_sorted[:200] if nodes[i][2]==9]
