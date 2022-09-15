@@ -4,6 +4,8 @@ SPOKE graph properties: 2153759 nodes, 5475334 edges
 Most nodes have no out-edges - 1791381 nodes have no out-edges.
 2061691 nodes have no in-edges.
 
+Filtering for only nodes that have edges (in or out), we only have 391775 nodes.
+
 Node types:
 {1: ':Gene',
  2: ':SideEffect',
@@ -33,6 +35,21 @@ Node type counts:
  11: 14868,
  12: 182391,
  13: 897}
+
+Node type counts only for nodes that are connected:
+{1: 19576,
+ 2: 3874,
+ 3: 13321,
+ 4: 3459,
+ 5: 286735,
+ 6: 1737,
+ 7: 1748,
+ 8: 3163,
+ 9: 9537,
+ 10: 373,
+ 11: 13270,
+ 12: 34139,
+ 13: 843}
 
 
 Edge types:
@@ -114,3 +131,5 @@ Timing: 5min 54s to load graph and run pagerank three times
 2min 24s to load graph
 4.65 s to run pagerank on graph
 The most costly operation is actually symmetrize_matrix, which takes 3min 7s. This is probably being done in a very inefficient way.
+
+Update: 2min 54s total

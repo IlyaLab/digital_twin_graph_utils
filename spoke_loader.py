@@ -5,15 +5,16 @@ import csv
 from scipy import sparse, io
 
 
-def import_csv(csv_filename, edges_to_include=None):
+def import_csv(csv_filename, edges_to_include=None, remove_unused_nodes=False):
     """
     Args:
         csv_filename: name of csv file
         edges_to_include: set of edge types
+        remove_unused_nodes: True if nodes with no in- or out-edges are to be removed.
 
     Returns:
         nodes: list of (_id, _name, _labels_id) where _labels_id corresponds to a key in node_types
-        edges: dict of (node1, node2, _type_id) where node1 and node2 are ints that index into nodes, and _type_id corresponds to a key in edge_types
+        edges: dict of (node1, node2, _type_id) where node1 and node2 index into nodes, and _type_id corresponds to a key in edge_types
         node_types: dict of int: str (_labels)
         edge_types: dict of int: str (_type)
     """
@@ -26,6 +27,8 @@ def import_csv(csv_filename, edges_to_include=None):
     edges = {}
     # edge_types is a map of string (_type) to node
     edge_types = {}
+    # sets of nodes that have in-edges or out-edges (to use when deciding whether to remove nodes)
+    node_has_edge = set()
     with open(csv_filename) as f:
         dr = csv.DictReader(f)
         for i, row in enumerate(dr):
@@ -44,13 +47,29 @@ def import_csv(csv_filename, edges_to_include=None):
             else:
                 edge_type = row['_type']
                 if edges_to_include is None or edge_type in edges_to_include:
-                    node1 = node_index[int(row['_start'])]
-                    node2 = node_index[int(row['_end'])]
+                    node1 = int(row['_start'])
+                    node2 = int(row['_end'])
+                    node_has_edge.add(node1)
+                    node_has_edge.add(node2)
                     if edge_type in edge_types:
                         edges[(node1, node2)] = edge_types[edge_type]
                     else:
                         edges[(node1, node2)] = len(edge_types) + 1
                         edge_types[row['_type']] = len(edge_types) + 1
+    if remove_unused_nodes:
+        # remove all nodes that don't have edges
+        to_remove = set(node_index.keys()).difference(node_has_edge)
+        nodes = [n for n in nodes if n[0] not in to_remove]
+        # rebuild node_index
+        node_index = {n[0]: i for i, n in enumerate(nodes)}
+    # convert edge indices
+    new_edges = {}
+    for k, e in edges.items():
+        node1, node2 = k
+        node1 = node_index[node1]
+        node2 = node_index[node2]
+        new_edges[(node1, node2)] = e
+    edges = new_edges
     node_types = {v: k for k, v in node_types.items()}
     edge_types = {v: k for k, v in edge_types.items()}
     return nodes, edges, node_types, edge_types
@@ -68,22 +87,18 @@ def to_sparse(nodes, edges):
     return edge_matrix
 
 
-def load_spoke(filename='spoke.csv'):
-    nodes, edges, node_types, edge_types = import_csv(filename)
+def load_spoke(filename='spoke.csv', edges_to_include=None, remove_unused_nodes=False):
+    nodes, edges, node_types, edge_types = import_csv(filename, edges_to_include, remove_unused_nodes)
     edge_matrix = to_sparse(nodes, edges)
     io.mmwrite('spoke.mtx', edge_matrix)
     return nodes, edges, node_types, edge_types, edge_matrix
 
 def symmetrize_matrix(matrix):
     """
-    Returns a dok matrix that is symmetric and a copy of matrix.
-    Takes the larger of two values if a pair is already symmetric.
+    Symmetrizes an adjacency matrix.
+
+    Warning: this completely destroys any meaning applied to node values. Nonzero = edge exists, zero = edge doesn't exist.
     """
-    matrix_copy = sparse.dok_array(matrix)
-    ind1, ind2 = matrix.nonzero()
-    for i, j in zip(ind1, ind2):
-        if matrix_copy[j, i]:
-            matrix_copy[j, i] = max(matrix[j, i], matrix[i, j])
-        else:
-            matrix_copy[j, i] = matrix[i, j]
-    return matrix_copy
+    lower_triangle = sparse.tril(matrix)
+    upper_triangle = sparse.triu(matrix)
+    return lower_triangle + lower_triangle.T + upper_triangle + upper_triangle.T

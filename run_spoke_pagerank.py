@@ -4,7 +4,8 @@ import spoke_loader
 import pagerank_sparse
 
 if __name__ == '__main__':
-    nodes, edges, node_types, edge_types, edge_matrix = spoke_loader.load_spoke('spoke.csv')
+    # load graph
+    nodes, edges, node_types, edge_types, edge_matrix = spoke_loader.load_spoke('spoke.csv', remove_unused_nodes=True)
     # run pagerank
     pr_probs_all = pagerank_sparse.pagerank(edge_matrix, modify_matrix=False, n_iters=50)
     np.savetxt('pr_spoke.txt', pr_probs_all.flatten())
@@ -33,5 +34,4 @@ if __name__ == '__main__':
     top_topic_genes = [nodes[i] + (pr_probs_topic_symmetric[i],) for i in topics_sorted[:400] if nodes[i][2]==1]
     top_topic_compounds = [nodes[i] + (pr_probs_topic_symmetric[i],) for i in topics_sorted[:2000] if nodes[i][2]==5]
     top_topic_diseases = [nodes[i] + (pr_probs_topic_symmetric[i],) for i in topics_sorted[:200] if nodes[i][2]==9]
-
-    # save pagerank results?
+    top_topic_foods = [nodes[i] + (pr_probs_topic_symmetric[i],) for i in topics_sorted[:2000] if nodes[i][2]==13]
