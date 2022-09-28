@@ -32,8 +32,24 @@ if __name__ == '__main__':
     pr_probs_topic_symmetric = pagerank_sparse.topic_pagerank(edge_matrix_symmetric, topics, modify_matrix=False, resid=0.85, topic_prob=0.15, n_iters=50)
     np.savetxt('pr_topics_spoke_symmetric.txt', pr_probs_topic_symmetric.flatten())
     topics_sorted = pr_probs_topic_symmetric.flatten().argsort()[::-1]
-    top_topic_nodes_pr = [nodes[i] + (pr_probs_topic_symmetric[i],) for i in topics_sorted[:50]]
-    top_topic_genes = [nodes[i] + (pr_probs_topic_symmetric[i],) for i in topics_sorted[:400] if nodes[i][2]==1]
-    top_topic_compounds = [nodes[i] + (pr_probs_topic_symmetric[i],) for i in topics_sorted[:2000] if nodes[i][2]==5]
-    top_topic_diseases = [nodes[i] + (pr_probs_topic_symmetric[i],) for i in topics_sorted[:200] if nodes[i][2]==9]
-    top_topic_foods = [nodes[i] + (pr_probs_topic_symmetric[i],) for i in topics_sorted[:2000] if nodes[i][2]==13]
+    top_topic_nodes_pr = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:50]]
+    top_topic_genes = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:400] if nodes[i][2]==1]
+    top_topic_anatomy = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:400] if nodes[i][2]==11]
+    top_topic_protein = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:400] if nodes[i][2]==12]
+    top_topic_compounds = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:2000] if nodes[i][2]==5]
+    top_topic_diseases = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:200] if nodes[i][2]==9]
+    top_topic_foods = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:2000] if nodes[i][2]==13]
+
+    import json
+    json.dump(top_topic_nodes_pr, open('top_topic_nodes_pr.json', 'w'), indent=2)
+    json.dump(top_topic_genes, open('top_topic_genes.json', 'w'), indent=2)
+    json.dump(top_topic_compounds, open('top_topic_compounds.json', 'w'), indent=2)
+    json.dump(top_topic_diseases, open('top_topic_diseases.json', 'w'), indent=2)
+    top_genes = [d[1] for d in top_topic_genes]
+    top_diseases = [d[1] for d in top_topic_diseases]
+    top_compounds = [d[1] for d in top_topic_compounds]
+    top_anatomy = [d[1] for d in top_topic_anatomy]
+    np.savetxt('top_t2d_genes.txt', top_genes, fmt='%s')
+    np.savetxt('top_t2d_diseases.txt', top_diseases, fmt='%s')
+    np.savetxt('top_t2d_compounds.txt', top_compounds, fmt='%s')
+    np.savetxt('top_t2d_anatomy.txt', top_anatomy, fmt='%s')

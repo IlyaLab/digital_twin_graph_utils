@@ -77,5 +77,5 @@ if __name__ == '__main__':
     edge_matrix = spoke_loader.symmetrize_matrix(edge_matrix)
     edge_matrix = sparse.lil_matrix(edge_matrix)
     print('calculating random walks...')
-    walks = random_walks(edge_matrix.rows, r=10, l=50, verbose=True)
+    walks = random_walks(edge_matrix.rows, r=5, l=25, verbose=True)
     n2v_model = run_word2vec(walks, 8, 50)
