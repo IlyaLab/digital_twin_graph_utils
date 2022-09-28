@@ -1,5 +1,3 @@
-# TODO: use an existing library for node2vec?
-# which library?
 import functools
 
 #from numba import jit
@@ -55,15 +53,29 @@ def random_walks(adj_list, r, l, p=1, q=1, verbose=False):
             walks.append(walk)
     return walks
 
+def run_word2vec(walks, k=10, d=64):
+    """
+    Uses gensim to run word2vec.
+    walks = list of random walks, returned by random_walks.
+    k = context size (word2vec parameter)
+    d = output dimensionality
+    """
+    import gensim.models
+    model = gensim.models.Word2Vec(sentences=walks, vector_size=d,
+            window=k)
+    return model
 
 
 if __name__ == '__main__':
     # TODO: try this with a smaller graph?
     import spoke_loader
+    import scipy.io
     # load graph
-    nodes, edges, node_types, edge_types, edge_matrix = spoke_loader.load_spoke('spoke.csv', remove_unused_nodes=True)
+    #nodes, edges, node_types, edge_types, edge_matrix = spoke_loader.load_spoke('spoke.csv', remove_unused_nodes=True)
+    edge_matrix = scipy.io.mmread('spoke.mtx')
+    print('matrix loaded')
     edge_matrix = spoke_loader.symmetrize_matrix(edge_matrix)
     edge_matrix = sparse.lil_matrix(edge_matrix)
-    adj_sets = [set(row) for row in edge_matrix.rows]
     print('calculating random walks...')
-    walks = random_walks(edge_matrix.rows, 1, 10, verbose=True)
+    walks = random_walks(edge_matrix.rows, r=10, l=50, verbose=True)
+    n2v_model = run_word2vec(walks, 8, 50)
