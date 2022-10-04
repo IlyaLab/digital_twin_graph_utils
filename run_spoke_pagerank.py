@@ -13,9 +13,13 @@ if __name__ == '__main__':
     top_pr_nodes = [nodes[i] for i in pr_sorted[:50]]
     # find interesting nodes?
     node_id_index = {n[0]: i for i, n in enumerate(nodes)}
+
     # i got these node ids via a neo4j query
     t2d_id = 38409
     diabetes_id = 1787474
+    # list of topics to use:
+    # "metformin"
+    # "D-glucose"
     topics = [t2d_id]
     topics = [node_id_index[i] for i in topics]
     # run topic pagerank on t2d

@@ -77,7 +77,7 @@ def import_csv(csv_filename, edges_to_include=None, remove_unused_nodes=False):
 
 def to_sparse(nodes, edges):
     """
-    Returns a LIL matrix from the edges...
+    Returns a DOK matrix from the edges...
     """
     n_nodes = len(nodes)
     edge_matrix = sparse.dok_array((n_nodes, n_nodes), dtype=int)
