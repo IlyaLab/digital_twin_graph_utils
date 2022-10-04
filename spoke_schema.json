@@ -1,0 +1,518 @@
+﻿[
+  {
+    "nodes": [
+      {
+        "identity": -8,
+        "labels": [
+          "Disease"
+        ],
+        "properties": {
+"indexes": [
+            "name"
+          ],
+"name": "Disease",
+"constraints": [
+            "CONSTRAINT ON ( disease:Disease ) ASSERT disease.identifier IS UNIQUE"
+          ]
+        }
+      },
+      {
+        "identity": -2,
+        "labels": [
+          "Pathway"
+        ],
+        "properties": {
+"indexes": [
+            "name"
+          ],
+"name": "Pathway",
+"constraints": [
+            "CONSTRAINT ON ( pathway:Pathway ) ASSERT pathway.identifier IS UNIQUE"
+          ]
+        }
+      },
+      {
+        "identity": -4,
+        "labels": [
+          "PharmacologicClass"
+        ],
+        "properties": {
+"indexes": [
+            "name"
+          ],
+"name": "PharmacologicClass",
+"constraints": [
+            "CONSTRAINT ON ( pharmacologicclass:PharmacologicClass ) ASSERT pharmacologicclass.identifier IS UNIQUE"
+          ]
+        }
+      },
+      {
+        "identity": -10,
+        "labels": [
+          "CellularComponent"
+        ],
+        "properties": {
+"indexes": [
+            "name"
+          ],
+"name": "CellularComponent",
+"constraints": [
+            "CONSTRAINT ON ( cellularcomponent:CellularComponent ) ASSERT cellularcomponent.identifier IS UNIQUE"
+          ]
+        }
+      },
+      {
+        "identity": -9,
+        "labels": [
+          "Compound"
+        ],
+        "properties": {
+"indexes": [
+            "chembl_id",
+            "name",
+            "canonical_smiles",
+            "standardized_smiles"
+          ],
+"name": "Compound",
+"constraints": [
+            "CONSTRAINT ON ( compound:Compound ) ASSERT compound.identifier IS UNIQUE"
+          ]
+        }
+      },
+      {
+        "identity": -3,
+        "labels": [
+          "Anatomy"
+        ],
+        "properties": {
+"indexes": [
+            "name"
+          ],
+"name": "Anatomy",
+"constraints": [
+            "CONSTRAINT ON ( anatomy:Anatomy ) ASSERT anatomy.identifier IS UNIQUE"
+          ]
+        }
+      },
+      {
+        "identity": -7,
+        "labels": [
+          "BiologicalProcess"
+        ],
+        "properties": {
+"indexes": [
+            "name"
+          ],
+"name": "BiologicalProcess",
+"constraints": [
+            "CONSTRAINT ON ( biologicalprocess:BiologicalProcess ) ASSERT biologicalprocess.identifier IS UNIQUE"
+          ]
+        }
+      },
+      {
+        "identity": -12,
+        "labels": [
+          "Protein"
+        ],
+        "properties": {
+"indexes": [
+            "chembl_id",
+            "name"
+          ],
+"name": "Protein",
+"constraints": [
+            "CONSTRAINT ON ( protein:Protein ) ASSERT protein.identifier IS UNIQUE"
+          ]
+        }
+      },
+      {
+        "identity": -5,
+        "labels": [
+          "Gene"
+        ],
+        "properties": {
+"indexes": [
+            "name"
+          ],
+"name": "Gene",
+"constraints": [
+            "CONSTRAINT ON ( gene:Gene ) ASSERT gene.identifier IS UNIQUE"
+          ]
+        }
+      },
+      {
+        "identity": -6,
+        "labels": [
+          "Symptom"
+        ],
+        "properties": {
+"indexes": [
+            "name"
+          ],
+"name": "Symptom",
+"constraints": [
+            "CONSTRAINT ON ( symptom:Symptom ) ASSERT symptom.identifier IS UNIQUE"
+          ]
+        }
+      },
+      {
+        "identity": -1,
+        "labels": [
+          "MolecularFunction"
+        ],
+        "properties": {
+"indexes": [
+            "name"
+          ],
+"name": "MolecularFunction",
+"constraints": [
+            "CONSTRAINT ON ( molecularfunction:MolecularFunction ) ASSERT molecularfunction.identifier IS UNIQUE"
+          ]
+        }
+      },
+      {
+        "identity": -11,
+        "labels": [
+          "SideEffect"
+        ],
+        "properties": {
+"indexes": [
+            "name"
+          ],
+"name": "SideEffect",
+"constraints": [
+            "CONSTRAINT ON ( sideeffect:SideEffect ) ASSERT sideeffect.identifier IS UNIQUE"
+          ]
+        }
+      },
+      {
+        "identity": -13,
+        "labels": [
+          "Food"
+        ],
+        "properties": {
+"indexes": [],
+"name": "Food",
+"constraints": []
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "identity": -7,
+        "start": -9,
+        "end": -11,
+        "type": "CAUSES_CcSE",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -6,
+        "start": -5,
+        "end": -7,
+        "type": "PARTICIPATES_GpBP",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -13,
+        "start": -9,
+        "end": -5,
+        "type": "DOWNREGULATES_CdG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -30,
+        "start": -12,
+        "end": -5,
+        "type": "TRANSLATEDFROM_PtG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -23,
+        "start": -9,
+        "end": -8,
+        "type": "PALLIATES_CpD",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -11,
+        "start": -8,
+        "end": -5,
+        "type": "DOWNREGULATES_DdG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -18,
+        "start": -8,
+        "end": -5,
+        "type": "ASSOCIATES_DaG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -28,
+        "start": -3,
+        "end": -3,
+        "type": "PARTOF_ApA",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -2,
+        "start": -5,
+        "end": -1,
+        "type": "PARTICIPATES_GpMF",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -27,
+        "start": -3,
+        "end": -3,
+        "type": "CONTAINS_AcA",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -12,
+        "start": -5,
+        "end": -10,
+        "type": "PARTICIPATES_GpCC",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -21,
+        "start": -9,
+        "end": -8,
+        "type": "TREATS_CtD",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -26,
+        "start": -3,
+        "end": -3,
+        "type": "ISA_AiA",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -29,
+        "start": -9,
+        "end": -5,
+        "type": "AFFECTS_CamG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -5,
+        "start": -3,
+        "end": -5,
+        "type": "DOWNREGULATES_AdG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -24,
+        "start": -8,
+        "end": -8,
+        "type": "ISA_DiD",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -22,
+        "start": -4,
+        "end": -9,
+        "type": "INCLUDES_PCiC",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -33,
+        "start": -9,
+        "end": -8,
+        "type": "CONTRAINDICATES_CcD",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -4,
+        "start": -5,
+        "end": -5,
+        "type": "INTERACTS_GiG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -3,
+        "start": -5,
+        "end": -5,
+        "type": "REGULATES_GrG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -17,
+        "start": -8,
+        "end": -3,
+        "type": "LOCALIZES_DlA",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -9,
+        "start": -5,
+        "end": -5,
+        "type": "COVARIES_GcG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -31,
+        "start": -9,
+        "end": -12,
+        "type": "INTERACTS_CiP",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -19,
+        "start": -8,
+        "end": -6,
+        "type": "PRESENTS_DpS",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -34,
+        "start": -9,
+        "end": -12,
+        "type": "BINDS_CbP",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -14,
+        "start": -8,
+        "end": -5,
+        "type": "UPREGULATES_DuG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -20,
+        "start": -8,
+        "end": -8,
+        "type": "RESEMBLES_DrD",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -25,
+        "start": -8,
+        "end": -8,
+        "type": "CONTAINS_DcD",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -32,
+        "start": -12,
+        "end": -12,
+        "type": "INTERACTS_PiP",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -1,
+        "start": -3,
+        "end": -5,
+        "type": "EXPRESSES_AeG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -16,
+        "start": -9,
+        "end": -9,
+        "type": "RESEMBLES_CrC",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -10,
+        "start": -5,
+        "end": -2,
+        "type": "PARTICIPATES_GpPW",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -35,
+        "start": -13,
+        "end": -9,
+        "type": "CONTAINS_FcCM",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -8,
+        "start": -3,
+        "end": -5,
+        "type": "UPREGULATES_AuG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -15,
+        "start": -9,
+        "end": -5,
+        "type": "UPREGULATES_CuG",
+        "properties": {
+
+        }
+      }
+    ]
+  }
+]
