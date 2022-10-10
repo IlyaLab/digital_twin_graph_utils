@@ -2,7 +2,7 @@ from scipy import sparse
 
 def to_sparse(nodes, edges):
     """
-    Returns a LIL matrix from the edges...
+    Returns a DOK matrix from the edges...
     """
     n_nodes = len(nodes)
     edge_matrix = sparse.dok_array((n_nodes, n_nodes), dtype=int)    
@@ -17,7 +17,7 @@ class Graph:
             edge_matrix=None):
         """
         nodes: list of (_id, _name, _labels_id) where _labels_id corresponds to a key in node_types
-        edges: dict of (node1, node2, _type_id) where node1 and node2 index into nodes, and _type_id corresponds to a key in edge_types
+        edges: dict of (node1, node2) : _type_id where node1 and node2 index into nodes, and _type_id corresponds to a key in edge_types
         node_types: dict of int: str (_labels)
         edge_types: dict of int: str (_type)
         """
@@ -31,6 +31,15 @@ class Graph:
             self.edge_matrix = to_sparse(nodes, edges)
         self.name_to_id = {x[1]: x[0] for x in nodes}
         self.id_to_index = {x[0]: i for i, x in enumerate(nodes)}
+        # adjacency list
+        self.outgoing_edges = {}
+        for k in self.edges.keys():
+            start_node, end_node = k
+            if k in self.outgoing_edges:
+                self.outgoing_edges[start_node].append(end_node)
+            else:
+                self.outgoing_edges[start_node] = [end_node]
+        # TODO: create a map of names to indices?
 
     def symmetrize_edge_matrix(self):
         matrix = self.edge_matrix
@@ -44,15 +53,52 @@ class Graph:
         """
         Returns an instance of Graph that only contains the given ids.
         """
-        pass
+        visited_indices = set()
+        # maps from old indices to new indices
+        index_map = {}
+        new_nodes = []
+        new_edges = {}
+        for ni in node_ids:
+            index = self.id_to_index[ni]
+            if index not in visited_indices:
+                new_nodes.append(self.nodes[index])
+                index_map[index] = len(new_nodes) - 1
+            visited_indices.add(index)
+        for index in visited_indices:
+            edges = self.outgoing_edges[index]
+            for e in edges:
+                if e in visited_indices:
+                    new_edges[index_map[index], index_map[e]] = self.edges[index, e]
+        return Graph(new_nodes, new_edges, self.node_types, self.edge_types)
+
 
     def get_subgraph_indices(self, node_indices):
         """
         Returns an instance of Graph that only contains the node indices.
         """
         pass
+        visited_indices = set()
+        # maps from old indices to new indices
+        index_map = {}
+        new_nodes = []
+        new_edges = {}
+        for index in node_indices:
+            if index not in visited_indices:
+                new_nodes.append(self.nodes[index])
+                index_map[index] = len(new_nodes) - 1
+            visited_indices.add(index)
+        for index in visited_indices:
+            edges = self.outgoing_edges[index]
+            for e in edges:
+                if e in visited_indices:
+                    new_edges[index_map[index], index_map[e]] = self.edges[index, e]
+        return Graph(new_nodes, new_edges, self.node_types, self.edge_types)
+
 
     def get_nodes_from_names(self, node_names):
+        """
+        Returns a node or a list of nodes. A node is a tuple of (id, name, type).
+        """
         if isinstance(node_names, str):
             pass
         else:
