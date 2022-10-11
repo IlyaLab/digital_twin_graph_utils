@@ -3,7 +3,6 @@
 import csv
 import gzip
 import os
-import sys
 
 from scipy import sparse, io
 
@@ -32,22 +31,28 @@ def import_csv(csv_filename, edges_to_include=None, remove_unused_nodes=False):
     edge_types = {}
     # sets of nodes that have in-edges or out-edges (to use when deciding whether to remove nodes)
     node_has_edge = set()
-    csv.field_size_limit(sys.maxsize)
+    csv.field_size_limit(99999999)
     if csv_filename.endswith('.gz'):
-        # TODO: handle gzip
+        # handle gzip
         f = gzip.open(csv_filename, 'rt')
     else:
         f = open(csv_filename)
-    dr = csv.DictReader(f)
+    dr = csv.DictReader(f, dialect='unix')
     for i, row in enumerate(dr):
         if i % 10000 == 0:
             print(i, 'nodes: ', len(node_index), 'edges: ', len(edges))
         # if this is a node
         if row['_id']:
-            if row['_labels'] in node_types:
-                nodes.append((int(row['_id']), row['name'], node_types[row['_labels']]))
+            print(row['license'])
+            if row['name']:
+                row_name = row['name']
+                print(row_name)
             else:
-                nodes.append((int(row['_id']), row['name'], len(node_types) + 1))
+                row_name = row['pref_name']
+            if row['_labels'] in node_types:
+                nodes.append((int(row['_id']), row_name, node_types[row['_labels']]))
+            else:
+                nodes.append((int(row['_id']), row_name, len(node_types) + 1))
                 node_types[row['_labels']] = len(node_types) + 1
             node_index[int(row['_id'])] = n_nodes 
             n_nodes += 1
@@ -115,4 +120,4 @@ def symmetrize_matrix(matrix):
     return lower_triangle + lower_triangle.T + upper_triangle + upper_triangle.T
 
 if __name__ == '__main__':
-    nodes, edges, node_types, edge_types, edge_matrix = load_spoke('spoke_2021.csv.gz', remove_unused_nodes=True, mtx_filename='spoke_2021.mtx')
+    nodes, edges, node_types, edge_types, edge_matrix = load_spoke('spoke_2021.csv', remove_unused_nodes=True, mtx_filename='spoke_2021.mtx.gz')
