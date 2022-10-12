@@ -1,0 +1,855 @@
+﻿[
+  {
+    "nodes": [
+      {
+        "identity": -19,
+        "labels": [
+          "AnatomyCellType"
+        ],
+        "properties": {
+"name": "AnatomyCellType",
+"indexes": [
+            "name,pref_name"
+          ],
+"constraints": [
+            "Constraint( id=145, name='constraint_393386f8', type='UNIQUENESS', schema=(:AnatomyCellType {identifier}), ownedIndex=142 )"
+          ]
+        }
+      },
+      {
+        "identity": -16,
+        "labels": [
+          "SARSCov2"
+        ],
+        "properties": {
+"name": "SARSCov2",
+"indexes": [
+            "name,pref_name"
+          ],
+"constraints": []
+        }
+      },
+      {
+        "identity": -20,
+        "labels": [
+          "Organism"
+        ],
+        "properties": {
+"name": "Organism",
+"indexes": [
+            "name,pref_name"
+          ],
+"constraints": []
+        }
+      },
+      {
+        "identity": -24,
+        "labels": [
+          "ProteinFamily"
+        ],
+        "properties": {
+"name": "ProteinFamily",
+"indexes": [
+            "name,pref_name"
+          ],
+"constraints": []
+        }
+      },
+      {
+        "identity": -3,
+        "labels": [
+          "Disease"
+        ],
+        "properties": {
+"name": "Disease",
+"indexes": [
+            "name,pref_name",
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=18, name='constraint_3cd5f687', type='UNIQUENESS', schema=(:Disease {identifier}), ownedIndex=15 )"
+          ]
+        }
+      },
+      {
+        "identity": -7,
+        "labels": [
+          "Pathway"
+        ],
+        "properties": {
+"name": "Pathway",
+"indexes": [
+            "name,pref_name",
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=46, name='constraint_194d7192', type='UNIQUENESS', schema=(:Pathway {identifier}), ownedIndex=43 )"
+          ]
+        }
+      },
+      {
+        "identity": -13,
+        "labels": [
+          "PharmacologicClass"
+        ],
+        "properties": {
+"name": "PharmacologicClass",
+"indexes": [
+            "name,pref_name",
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=88, name='constraint_ae28360e', type='UNIQUENESS', schema=(:PharmacologicClass {identifier}), ownedIndex=85 )"
+          ]
+        }
+      },
+      {
+        "identity": -11,
+        "labels": [
+          "CellularComponent"
+        ],
+        "properties": {
+"name": "CellularComponent",
+"indexes": [
+            "name",
+            "name,pref_name"
+          ],
+"constraints": [
+            "Constraint( id=74, name='constraint_32440385', type='UNIQUENESS', schema=(:CellularComponent {identifier}), ownedIndex=71 )"
+          ]
+        }
+      },
+      {
+        "identity": -2,
+        "labels": [
+          "Compound"
+        ],
+        "properties": {
+"name": "Compound",
+"indexes": [
+            "name,pref_name",
+            "standardized_smiles",
+            "name",
+            "drugbank_id",
+            "max_phase",
+            "inchikey_prefix",
+            "chembl_id",
+            "inchikey",
+            "canonical_smiles"
+          ],
+"constraints": [
+            "Constraint( id=11, name='constraint_f88f70a', type='UNIQUENESS', schema=(:Compound {identifier}), ownedIndex=8 )"
+          ]
+        }
+      },
+      {
+        "identity": -1,
+        "labels": [
+          "Anatomy"
+        ],
+        "properties": {
+"name": "Anatomy",
+"indexes": [
+            "name,pref_name",
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=4, name='constraint_3b16e5c4', type='UNIQUENESS', schema=(:Anatomy {identifier}), ownedIndex=1 )"
+          ]
+        }
+      },
+      {
+        "identity": -22,
+        "labels": [
+          "Reaction"
+        ],
+        "properties": {
+"name": "Reaction",
+"indexes": [
+            "name,pref_name"
+          ],
+"constraints": []
+        }
+      },
+      {
+        "identity": -10,
+        "labels": [
+          "BiologicalProcess"
+        ],
+        "properties": {
+"name": "BiologicalProcess",
+"indexes": [
+            "name,pref_name",
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=67, name='constraint_47e3bd31', type='UNIQUENESS', schema=(:BiologicalProcess {identifier}), ownedIndex=64 )"
+          ]
+        }
+      },
+      {
+        "identity": -8,
+        "labels": [
+          "Protein"
+        ],
+        "properties": {
+"name": "Protein",
+"indexes": [
+            "name,pref_name",
+            "name",
+            "chembl_id"
+          ],
+"constraints": [
+            "Constraint( id=53, name='constraint_f2994828', type='UNIQUENESS', schema=(:Protein {identifier}), ownedIndex=50 )"
+          ]
+        }
+      },
+      {
+        "identity": -5,
+        "labels": [
+          "Gene"
+        ],
+        "properties": {
+"name": "Gene",
+"indexes": [
+            "ensembl",
+            "name",
+            "name,pref_name"
+          ],
+"constraints": [
+            "Constraint( id=32, name='constraint_a6aec5e1', type='UNIQUENESS', schema=(:Gene {identifier}), ownedIndex=29 )"
+          ]
+        }
+      },
+      {
+        "identity": -17,
+        "labels": [
+          "Version"
+        ],
+        "properties": {
+"name": "Version",
+"indexes": [],
+"constraints": []
+        }
+      },
+      {
+        "identity": -18,
+        "labels": [
+          "CellType"
+        ],
+        "properties": {
+"name": "CellType",
+"indexes": [
+            "name,pref_name"
+          ],
+"constraints": [
+            "Constraint( id=138, name='constraint_3ff6f930', type='UNIQUENESS', schema=(:CellType {identifier}), ownedIndex=135 )"
+          ]
+        }
+      },
+      {
+        "identity": -23,
+        "labels": [
+          "ProteinDomain"
+        ],
+        "properties": {
+"name": "ProteinDomain",
+"indexes": [
+            "name,pref_name"
+          ],
+"constraints": []
+        }
+      },
+      {
+        "identity": -6,
+        "labels": [
+          "Nutrient"
+        ],
+        "properties": {
+"name": "Nutrient",
+"indexes": [
+            "name,pref_name"
+          ],
+"constraints": [
+            "Constraint( id=39, name='constraint_7c87b704', type='UNIQUENESS', schema=(:Nutrient {identifier}), ownedIndex=36 )"
+          ]
+        }
+      },
+      {
+        "identity": -15,
+        "labels": [
+          "DatabaseTimestamp"
+        ],
+        "properties": {
+"name": "DatabaseTimestamp",
+"indexes": [],
+"constraints": []
+        }
+      },
+      {
+        "identity": -9,
+        "labels": [
+          "Symptom"
+        ],
+        "properties": {
+"name": "Symptom",
+"indexes": [
+            "name,pref_name",
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=60, name='constraint_3c58a7f6', type='UNIQUENESS', schema=(:Symptom {identifier}), ownedIndex=57 )"
+          ]
+        }
+      },
+      {
+        "identity": -12,
+        "labels": [
+          "MolecularFunction"
+        ],
+        "properties": {
+"name": "MolecularFunction",
+"indexes": [
+            "name",
+            "name,pref_name"
+          ],
+"constraints": [
+            "Constraint( id=81, name='constraint_ae45f14', type='UNIQUENESS', schema=(:MolecularFunction {identifier}), ownedIndex=78 )"
+          ]
+        }
+      },
+      {
+        "identity": -21,
+        "labels": [
+          "EC"
+        ],
+        "properties": {
+"name": "EC",
+"indexes": [
+            "name,pref_name"
+          ],
+"constraints": []
+        }
+      },
+      {
+        "identity": -4,
+        "labels": [
+          "Food"
+        ],
+        "properties": {
+"name": "Food",
+"indexes": [
+            "name,pref_name"
+          ],
+"constraints": [
+            "Constraint( id=25, name='constraint_7ed27af', type='UNIQUENESS', schema=(:Food {identifier}), ownedIndex=22 )"
+          ]
+        }
+      },
+      {
+        "identity": -14,
+        "labels": [
+          "SideEffect"
+        ],
+        "properties": {
+"name": "SideEffect",
+"indexes": [
+            "name,pref_name",
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=95, name='constraint_1e0fb2df', type='UNIQUENESS', schema=(:SideEffect {identifier}), ownedIndex=92 )"
+          ]
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "identity": -1,
+        "start": -2,
+        "end": -14,
+        "type": "CAUSES_CcSE",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -28,
+        "start": -2,
+        "end": -5,
+        "type": "DOWNREGULATES_CdG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -31,
+        "start": -5,
+        "end": -5,
+        "type": "UPREGULATES_GPuG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -25,
+        "start": -19,
+        "end": -1,
+        "type": "ISIN_ACTiiA",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -5,
+        "start": -1,
+        "end": -1,
+        "type": "CONTAINS_AcA",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -18,
+        "start": -5,
+        "end": -12,
+        "type": "PARTICIPATES_GpMF",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -12,
+        "start": -2,
+        "end": -3,
+        "type": "TREATS_CtD",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -4,
+        "start": -1,
+        "end": -1,
+        "type": "ISA_AiA",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -20,
+        "start": -2,
+        "end": -5,
+        "type": "AFFECTS_CamG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -23,
+        "start": -1,
+        "end": -5,
+        "type": "DOWNREGULATES_AdG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -21,
+        "start": -13,
+        "end": -2,
+        "type": "INCLUDES_PCiC",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -39,
+        "start": -7,
+        "end": -7,
+        "type": "CONTAINS_PWcPW",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -24,
+        "start": -16,
+        "end": -8,
+        "type": "INTERACTS_CPiP",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -51,
+        "start": -23,
+        "end": -8,
+        "type": "PARTOF_PDpP",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -47,
+        "start": -20,
+        "end": -20,
+        "type": "ISA_OiO",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -30,
+        "start": -5,
+        "end": -5,
+        "type": "DOWNREGULATES_GPdG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -41,
+        "start": -21,
+        "end": -22,
+        "type": "CATALYZES_ECcR",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -46,
+        "start": -20,
+        "end": -20,
+        "type": "CONTAINS_OcO",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -15,
+        "start": -3,
+        "end": -9,
+        "type": "PRESENTS_DpS",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -48,
+        "start": -20,
+        "end": -21,
+        "type": "INCLUDES_OiEC",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -8,
+        "start": -8,
+        "end": -8,
+        "type": "INTERACTS_PiP",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -36,
+        "start": -1,
+        "end": -5,
+        "type": "EXPRESSES_AeG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -52,
+        "start": -8,
+        "end": -3,
+        "type": "INCREASEDIN_PiD",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -17,
+        "start": -5,
+        "end": -10,
+        "type": "PARTICIPATES_GpBP",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -54,
+        "start": -20,
+        "end": -3,
+        "type": "CAUSES_OcD",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -40,
+        "start": -7,
+        "end": -7,
+        "type": "ISA_PWiPW",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -9,
+        "start": -3,
+        "end": -5,
+        "type": "ASSOCIATES_DaG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -6,
+        "start": -1,
+        "end": -1,
+        "type": "PARTOF_ApA",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -38,
+        "start": -20,
+        "end": -7,
+        "type": "INCLUDES_OiPW",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -42,
+        "start": -7,
+        "end": -21,
+        "type": "INCLUDES_PWiEC",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -26,
+        "start": -19,
+        "end": -18,
+        "type": "ISIN_ACTiiCT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -19,
+        "start": -5,
+        "end": -11,
+        "type": "PARTICIPATES_GpCC",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -35,
+        "start": -5,
+        "end": -5,
+        "type": "DOWNREGULATES_KGdG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -49,
+        "start": -20,
+        "end": -16,
+        "type": "ENCODES_OeP",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -50,
+        "start": -23,
+        "end": -24,
+        "type": "MEMBEROF_PDmPF",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -33,
+        "start": -5,
+        "end": -5,
+        "type": "DOWNREGULATES_OGdG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -2,
+        "start": -3,
+        "end": -3,
+        "type": "ISA_DiD",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -37,
+        "start": -5,
+        "end": -8,
+        "type": "ENCODES_GeP",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -11,
+        "start": -4,
+        "end": -6,
+        "type": "CONTAINS_FcN",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -13,
+        "start": -2,
+        "end": -3,
+        "type": "CONTRAINDICATES_CcD",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -53,
+        "start": -8,
+        "end": -3,
+        "type": "DECREASEDIN_PdD",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -43,
+        "start": -22,
+        "end": -2,
+        "type": "PRODUCES_RpC",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -7,
+        "start": -3,
+        "end": -1,
+        "type": "LOCALIZES_DlA",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -44,
+        "start": -22,
+        "end": -2,
+        "type": "CONSUMES_RcC",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -14,
+        "start": -2,
+        "end": -8,
+        "type": "BINDS_CbP",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -34,
+        "start": -5,
+        "end": -5,
+        "type": "UPREGULATES_KGuG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -3,
+        "start": -3,
+        "end": -3,
+        "type": "CONTAINS_DcD",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -16,
+        "start": -3,
+        "end": -3,
+        "type": "RESEMBLES_DrD",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -10,
+        "start": -4,
+        "end": -2,
+        "type": "CONTAINS_FcC",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -27,
+        "start": -19,
+        "end": -5,
+        "type": "EXPRESSES_ACTeG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -32,
+        "start": -5,
+        "end": -5,
+        "type": "UPREGULATES_OGuG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -45,
+        "start": -21,
+        "end": -8,
+        "type": "ISA_PiEC",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -22,
+        "start": -1,
+        "end": -5,
+        "type": "UPREGULATES_AuG",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -29,
+        "start": -2,
+        "end": -5,
+        "type": "UPREGULATES_CuG",
+        "properties": {
+
+        }
+      }
+    ]
+  }
+]
