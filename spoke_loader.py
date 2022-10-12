@@ -87,6 +87,18 @@ def import_csv(csv_filename, edges_to_include=None, remove_unused_nodes=False):
     edge_types = {v: k for k, v in edge_types.items()}
     return nodes, edges, node_types, edge_types
 
+def import_jsonl(filename):
+    """
+    Imports a jsonl file.
+    """
+
+
+def import_nodes_edges(node_file, edges_file):
+    """
+    Imports nodes and edges separately.
+    """
+    # TODO: make this work
+
 
 def to_sparse(nodes, edges):
     """
