@@ -31,15 +31,22 @@ class Graph:
             self.edge_matrix = to_sparse(nodes, edges)
         self.name_to_id = {x[1]: x[0] for x in nodes}
         self.id_to_index = {x[0]: i for i, x in enumerate(nodes)}
-        # adjacency list
-        self.outgoing_edges = {}
-        for k in self.edges.keys():
-            start_node, end_node = k
-            if k in self.outgoing_edges:
-                self.outgoing_edges[start_node].append(end_node)
-            else:
-                self.outgoing_edges[start_node] = [end_node]
-        # TODO: create a map of names to indices?
+        # adjacency list - map of node index to list of node indices
+        self._outgoing_edges = {}
+
+    @property
+    def outgoing_edges(self):
+        if self._outgoing_edges:
+            return self._outgoing_edges
+        else:
+            self._outgoing_edges = {}
+            for k in self.edges.keys():
+                start_node, end_node = k
+                if k in self._outgoing_edges:
+                    self._outgoing_edges[start_node].append(end_node)
+                else:
+                    self._outgoing_edges[start_node] = [end_node]
+            return self._outgoing_edges
 
     def symmetrize_edge_matrix(self):
         matrix = self.edge_matrix
@@ -94,13 +101,35 @@ class Graph:
                     new_edges[index_map[index], index_map[e]] = self.edges[index, e]
         return Graph(new_nodes, new_edges, self.node_types, self.edge_types)
 
+    def get_indices_from_names(self, node_names):
+        """
+        Returns an index or a list of indices.
+        """
+        if isinstance(node_names, str):
+            node_id = self.name_to_id[node_names]
+            return self.id_to_index[node_id]
+        else:
+            indices = [self.id_to_index[self.name_to_id[n]] for n in node_names]
+            return indices
 
     def get_nodes_from_names(self, node_names):
         """
         Returns a node or a list of nodes. A node is a tuple of (id, name, type).
         """
         if isinstance(node_names, str):
-            pass
+            node_id = self.name_to_id[node_names]
+            node_index = self.id_to_index[node_id]
+            return self.nodes[node_index]
         else:
-            pass
+            indices = [self.id_to_index[self.name_to_id[n]] for n in node_names]
+            nodes = [self.nodes[n] for n in indices]
+            return nodes
 
+    def get_nodes_from_ids(self, node_ids):
+        """
+        Returns a node or a list of nodes, given ids.
+        """
+        if isinstance(node_ids, int):
+            return self.nodes[self.id_to_index[node_ids]]
+        else:
+            return [self.nodes[self.id_to_index[i]] for i in node_ids]

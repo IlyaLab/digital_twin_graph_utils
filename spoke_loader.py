@@ -221,7 +221,7 @@ def symmetrize_matrix(matrix):
 
 if __name__ == '__main__':
     #nodes, edges, node_types, edge_types, edge_matrix = load_spoke('spoke_2021.csv', remove_unused_nodes=True, mtx_filename='spoke_2021.mtx.gz')
-    nodes, edges, node_types, edge_types = import_jsonl('spoke_2021.jsonl', remove_unused_nodes=True)
+    nodes, edges, node_types, edge_types = import_jsonl('spoke_2021.jsonl.gz', remove_unused_nodes=True)
     # TODO: compute some graph statistics?
     from collections import Counter
     node_type_counts = Counter()
