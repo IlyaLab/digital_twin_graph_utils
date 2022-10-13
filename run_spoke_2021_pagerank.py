@@ -1,3 +1,5 @@
+import json
+
 import numpy as np
 
 import spoke_loader
@@ -33,6 +35,13 @@ if __name__ == '__main__':
 
     # try it with a symmetric adjacency matrix? are the results more reasonable?
     edge_matrix_symmetric = spoke_loader.symmetrize_matrix(edge_matrix)
+    # run pagerank on symmetric matrix
+    pr_probs_all = pagerank_sparse.pagerank(edge_matrix, modify_matrix=False, n_iters=50)
+    pr_probs_all = pr_probs_all.flatten()
+    pr_sorted = pr_probs_all.argsort()[::-1]
+    top_pr_nodes = [nodes[i] + (pr_probs_all[i],) for i in pr_sorted[:100]]
+    json.dump(top_pr_nodes, open('top_nodes_pr_symmetric.json', 'w'), indent=2)
+    # run topic pagerank on a symmetric matrix
     pr_probs_topic_symmetric = pagerank_sparse.topic_pagerank(edge_matrix_symmetric, topics, modify_matrix=False, resid=0.85, topic_prob=0.15, n_iters=50)
     np.savetxt('pr_topics_spoke_2021.txt', pr_probs_topic_symmetric.flatten())
     topics_sorted = pr_probs_topic_symmetric.flatten().argsort()[::-1]
@@ -44,7 +53,6 @@ if __name__ == '__main__':
     top_topic_diseases = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:200] if node_types[nodes[i][2]]=='Disease']
     top_topic_foods = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:2000] if node_types[nodes[i][2]]=='Food']
 
-    import json
     json.dump(top_topic_nodes_pr, open('top_topic_nodes_pr.json', 'w'), indent=2)
     json.dump(top_topic_genes, open('top_topic_genes.json', 'w'), indent=2)
     json.dump(top_topic_compounds, open('top_topic_compounds.json', 'w'), indent=2)
@@ -57,3 +65,4 @@ if __name__ == '__main__':
     np.savetxt('top_t2d_diseases.txt', top_diseases, fmt='%s')
     np.savetxt('top_t2d_compounds.txt', top_compounds, fmt='%s')
     np.savetxt('top_t2d_anatomy.txt', top_anatomy, fmt='%s')
+
