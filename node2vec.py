@@ -32,6 +32,7 @@ def random_walks(adj_list, r, l, p=1, q=1, verbose=False):
         transition_probs /= transition_probs.sum()
         return transition_probs
     walks = []
+    # TODO: parallelize this?
     for start in range(len(adj_list)):
         if verbose and start % 1000 == 0:
             print('Node: ', start)
