@@ -112,6 +112,15 @@ class Graph:
             indices = [self.id_to_index[self.name_to_id[n]] for n in node_names]
             return indices
 
+    def get_indices_from_ids(self, node_ids):
+        """
+        Returns an index or a list of indices, given ids.
+        """
+        if isinstance(node_ids, int):
+            return self.id_to_index[node_ids]
+        else:
+            return [self.id_to_index[i] for i in node_ids]
+
     def get_nodes_from_names(self, node_names):
         """
         Returns a node or a list of nodes. A node is a tuple of (id, name, type).

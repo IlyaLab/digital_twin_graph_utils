@@ -24,6 +24,10 @@ if __name__ == '__main__':
     # "D-glucose"
     topics = [t2d_name]
     topics = [g.get_indices_from_names(i) for i in topics]
+    # insulin, dextrose (glucose), glucagon, hyperglycemia, chronic kidney disease
+    topic_ids = [350843, 294279, 40330, 2173881, 2165474]
+    topics += g.get_indices_from_ids(topic_ids)
+
     # run topic pagerank on t2d
     pr_probs_topic = pagerank_sparse.topic_pagerank(edge_matrix, topics, modify_matrix=False, resid=0.85, topic_prob=0.15, n_iters=50)
     np.savetxt('pr_topics_spoke_2021.txt', pr_probs_topic.flatten())
@@ -50,13 +54,22 @@ if __name__ == '__main__':
     top_topic_anatomy = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:400] if node_types[nodes[i][2]]=='Anatomy']
     top_topic_protein = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:400] if node_types[nodes[i][2]]=='Protein']
     top_topic_compounds = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:2000] if node_types[nodes[i][2]]=='Compound']
-    top_topic_diseases = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:200] if node_types[nodes[i][2]]=='Disease']
-    top_topic_foods = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:2000] if node_types[nodes[i][2]]=='Food']
+    top_topic_diseases = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:400] if node_types[nodes[i][2]]=='Disease']
+    top_topic_foods = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:5000] if node_types[nodes[i][2]]=='Food']
+    top_topic_anatomycelltype = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:5000] if node_types[nodes[i][2]]=='AnatomyCellType']
+    top_topic_bp = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:5000] if node_types[nodes[i][2]]=='BiologicalProcess']
+    top_topic_pathway = [nodes[i] + (pr_probs_topic_symmetric[i][0],) for i in topics_sorted[:5000] if node_types[nodes[i][2]]=='Pathway']
 
     json.dump(top_topic_nodes_pr, open('top_topic_nodes_pr.json', 'w'), indent=2)
     json.dump(top_topic_genes, open('top_topic_genes.json', 'w'), indent=2)
     json.dump(top_topic_compounds, open('top_topic_compounds.json', 'w'), indent=2)
     json.dump(top_topic_diseases, open('top_topic_diseases.json', 'w'), indent=2)
+    json.dump(top_topic_anatomy, open('top_topic_anatomy.json', 'w'), indent=2)
+    json.dump(top_topic_protein, open('top_topic_protein.json', 'w'), indent=2)
+    json.dump(top_topic_foods, open('top_topic_food.json', 'w'), indent=2)
+    json.dump(top_topic_anatomycelltype, open('top_topic_anatomyCellType.json', 'w'), indent=2)
+    json.dump(top_topic_bp, open('top_topic_biologicalProcess.json', 'w'), indent=2)
+    json.dump(top_topic_pathway, open('top_topic_pathway.json', 'w'), indent=2)
     top_genes = [d[1] for d in top_topic_genes]
     top_diseases = [d[1] for d in top_topic_diseases]
     top_compounds = [d[1] for d in top_topic_compounds]
@@ -65,4 +78,3 @@ if __name__ == '__main__':
     np.savetxt('top_t2d_diseases.txt', top_diseases, fmt='%s')
     np.savetxt('top_t2d_compounds.txt', top_compounds, fmt='%s')
     np.savetxt('top_t2d_anatomy.txt', top_anatomy, fmt='%s')
-
