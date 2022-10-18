@@ -4,7 +4,7 @@ import numpy as np
 from scipy import sparse, io
 
 
-def pagerank(adjacency, probs=None, n_iters=20, resid=0.85, modify_matrix=True):
+def pagerank(adjacency, probs=None, n_iters=20, resid=0.85, modify_matrix=False):
     """
     Args:
         adjacency - sparse matrix
@@ -34,14 +34,18 @@ def pagerank(adjacency, probs=None, n_iters=20, resid=0.85, modify_matrix=True):
     return probs
 
 
-def topic_pagerank(adjacency, topics, probs=None, n_iters=20, resid=0.85, topic_prob=0.15, modify_matrix=True):
+def topic_pagerank(adjacency, topics, probs=None, topic_probs=None, n_iters=20, resid=0.85, topic_prob=0.15, modify_matrix=False):
     """
     Args:
         adjacency - sparse matrix
-        topics - a list of node indices representing the priority nodes.
+        topics - a list of node indices representing the topic nodes.
         probs - array of initial random jump probabilities.
+        topic_probs - array of probabilities for each topic (sums to 1).
         resid - probability of using the transition matrix.
         topic_prob - probability of jumping to the selected topics. By default, 1 - resid - topic_prob = 0; if this is less than 0, then there is a probability of a random jump.
+
+    Returns:
+        array of probabilities for each node in the matrix
     """
     n_nodes, _ = adjacency.shape
     adjacency = sparse.csr_array(adjacency.astype(bool)).astype(float)
@@ -62,6 +66,8 @@ def topic_pagerank(adjacency, topics, probs=None, n_iters=20, resid=0.85, topic_
     # create a topic vector
     topic_vector = np.zeros((n_nodes, 1))
     topic_vector[topics, :] = 1/len(topics)
+    if topic_probs is not None:
+        topic_vector[topics, :] = topic_probs/sum(topic_probs)
     # run power iterations
     random_prob = 1 - resid - topic_prob
     for _ in range(n_iters):
@@ -77,6 +83,7 @@ def run_spoke(matrix_filename='spoke.mtx'):
     matrix = io.mmread(matrix_filename)
     probs = pagerank(matrix, modify_matrix=False)
     return probs
+
 
 if __name__ == '__main__':
     adjacency = sparse.csc_array([[0,0,0,0], [1,0,1,0], [1,0,0,0],[1,1,1,0]])
