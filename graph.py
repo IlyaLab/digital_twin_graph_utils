@@ -13,13 +13,16 @@ def to_sparse(nodes, edges):
 
 class Graph:
 
+    # TODO: multiedges?
     def __init__(self, nodes, edges, node_types, edge_types,
-            edge_matrix=None):
+            edge_matrix=None, multi_edges=False):
         """
         nodes: list of (_id, _name, _labels_id) where _labels_id corresponds to a key in node_types
         edges: dict of (node1, node2) : _type_id where node1 and node2 index into nodes, and _type_id corresponds to a key in edge_types
         node_types: dict of int: str (_labels)
-        edge_types: dict of int: str (_type)
+        edge_types: dict of int: str (_type or list of types for multi-edge graphs)
+        edge_matrix: sparse array
+        multi_edge: boolean
         """
         self.nodes = nodes
         self.edges = edges
@@ -33,6 +36,7 @@ class Graph:
         self.id_to_index = {x[0]: i for i, x in enumerate(nodes)}
         # adjacency list - map of node index to list of node indices
         self._outgoing_edges = {}
+        self.multi_edges = multi_edges
 
     @property
     def outgoing_edges(self):

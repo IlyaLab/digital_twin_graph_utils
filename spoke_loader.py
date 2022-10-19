@@ -8,6 +8,7 @@ import os
 from scipy import sparse, io
 
 
+# TODO: multiple edges between two nodes?
 def import_csv(csv_filename, edges_to_include=None, remove_unused_nodes=False):
     """
     Args:
@@ -88,6 +89,7 @@ def import_csv(csv_filename, edges_to_include=None, remove_unused_nodes=False):
     edge_types = {v: k for k, v in edge_types.items()}
     return nodes, edges, node_types, edge_types
 
+# TODO: multiple edges between two nodes?
 def import_jsonl(filename, edges_to_include=None, remove_unused_nodes=True):
     """
     Imports a jsonl file.
