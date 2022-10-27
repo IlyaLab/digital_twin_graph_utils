@@ -134,6 +134,8 @@ def import_jsonl(filename, edges_to_include=None, remove_unused_nodes=True):
                 row_name = row['properties']['pref_name']
             elif 'identifier' in row['properties'] and row['properties']['identifier'] != '':
                 row_name = row['properties']['identifier']
+            elif 'id' in row['properties'] and row['properties']['id']:
+                row_name = row['properties']['id']
             else:
                 row_name = ''
             row_label = row['labels'][0]

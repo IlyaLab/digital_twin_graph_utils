@@ -1,0 +1,2030 @@
+﻿[
+  {
+    "nodes": [
+      {
+        "identity": -7,
+        "labels": [
+          "Clinical_variable"
+        ],
+        "properties": {
+"name": "Clinical_variable",
+"indexes": [
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=20, name='constraint_9cbc808f', type='UNIQUENESS', schema=(:Clinical_variable {id}), ownedIndex=19 )"
+          ]
+        }
+      },
+      {
+        "identity": -6,
+        "labels": [
+          "Modification"
+        ],
+        "properties": {
+"name": "Modification",
+"indexes": [
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=17, name='constraint_2a2c57a0', type='UNIQUENESS', schema=(:Modification {id}), ownedIndex=16 )"
+          ]
+        }
+      },
+      {
+        "identity": -30,
+        "labels": [
+          "User"
+        ],
+        "properties": {
+"name": "User",
+"indexes": [],
+"constraints": [
+            "Constraint( id=83, name='constraint_952bbd70', type='UNIQUENESS', schema=(:User {name}), ownedIndex=82 )",
+            "Constraint( id=85, name='constraint_99d662d3', type='UNIQUENESS', schema=(:User {username}), ownedIndex=84 )",
+            "Constraint( id=81, name='constraint_47e7f15d', type='UNIQUENESS', schema=(:User {id}), ownedIndex=80 )",
+            "Constraint( id=87, name='constraint_3a8336b6', type='UNIQUENESS', schema=(:User {email}), ownedIndex=86 )"
+          ]
+        }
+      },
+      {
+        "identity": -1,
+        "labels": [
+          "Disease"
+        ],
+        "properties": {
+"name": "Disease",
+"indexes": [
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=2, name='constraint_6f637020', type='UNIQUENESS', schema=(:Disease {id}), ownedIndex=1 )"
+          ]
+        }
+      },
+      {
+        "identity": -26,
+        "labels": [
+          "Metabolite"
+        ],
+        "properties": {
+"name": "Metabolite",
+"indexes": [],
+"constraints": [
+            "Constraint( id=73, name='constraint_bc2fd9ca', type='UNIQUENESS', schema=(:Metabolite {id}), ownedIndex=72 )"
+          ]
+        }
+      },
+      {
+        "identity": -3,
+        "labels": [
+          "Biological_process"
+        ],
+        "properties": {
+"name": "Biological_process",
+"indexes": [
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=8, name='constraint_c5e12077', type='UNIQUENESS', schema=(:Biological_process {id}), ownedIndex=7 )"
+          ]
+        }
+      },
+      {
+        "identity": -29,
+        "labels": [
+          "Pathway"
+        ],
+        "properties": {
+"name": "Pathway",
+"indexes": [],
+"constraints": [
+            "Constraint( id=79, name='constraint_e9a3c507', type='UNIQUENESS', schema=(:Pathway {id}), ownedIndex=78 )"
+          ]
+        }
+      },
+      {
+        "identity": -27,
+        "labels": [
+          "Protein_structure"
+        ],
+        "properties": {
+"name": "Protein_structure",
+"indexes": [],
+"constraints": [
+            "Constraint( id=75, name='constraint_d5da04e6', type='UNIQUENESS', schema=(:Protein_structure {id}), ownedIndex=74 )"
+          ]
+        }
+      },
+      {
+        "identity": -35,
+        "labels": [
+          "Timepoint"
+        ],
+        "properties": {
+"name": "Timepoint",
+"indexes": [],
+"constraints": [
+            "Constraint( id=100, name='constraint_dcaf63b', type='UNIQUENESS', schema=(:Timepoint {id}), ownedIndex=99 )"
+          ]
+        }
+      },
+      {
+        "identity": -19,
+        "labels": [
+          "Complex"
+        ],
+        "properties": {
+"name": "Complex",
+"indexes": [],
+"constraints": [
+            "Constraint( id=55, name='constraint_4cf5a3bc', type='UNIQUENESS', schema=(:Complex {name}), ownedIndex=54 )",
+            "Constraint( id=53, name='constraint_3c0acf35', type='UNIQUENESS', schema=(:Complex {id}), ownedIndex=52 )"
+          ]
+        }
+      },
+      {
+        "identity": -10,
+        "labels": [
+          "Experimental_factor"
+        ],
+        "properties": {
+"name": "Experimental_factor",
+"indexes": [
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=29, name='constraint_130cd769', type='UNIQUENESS', schema=(:Experimental_factor {id}), ownedIndex=28 )"
+          ]
+        }
+      },
+      {
+        "identity": -2,
+        "labels": [
+          "Tissue"
+        ],
+        "properties": {
+"name": "Tissue",
+"indexes": [
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=5, name='constraint_80dda1d2', type='UNIQUENESS', schema=(:Tissue {id}), ownedIndex=4 )"
+          ]
+        }
+      },
+      {
+        "identity": -25,
+        "labels": [
+          "Functional_region"
+        ],
+        "properties": {
+"name": "Functional_region",
+"indexes": [],
+"constraints": [
+            "Constraint( id=71, name='constraint_aea2d651', type='UNIQUENESS', schema=(:Functional_region {id}), ownedIndex=70 )"
+          ]
+        }
+      },
+      {
+        "identity": -13,
+        "labels": [
+          "Gene"
+        ],
+        "properties": {
+"name": "Gene",
+"indexes": [],
+"constraints": [
+            "Constraint( id=37, name='constraint_fc066f84', type='UNIQUENESS', schema=(:Gene {id}), ownedIndex=36 )",
+            "Constraint( id=39, name='constraint_35b22181', type='UNIQUENESS', schema=(:Gene {name}), ownedIndex=38 )"
+          ]
+        }
+      },
+      {
+        "identity": -23,
+        "labels": [
+          "Clinically_relevant_variant"
+        ],
+        "properties": {
+"name": "Clinically_relevant_variant",
+"indexes": [],
+"constraints": [
+            "Constraint( id=67, name='constraint_bb4c7048', type='UNIQUENESS', schema=(:Clinically_relevant_variant {id}), ownedIndex=66 )"
+          ]
+        }
+      },
+      {
+        "identity": -17,
+        "labels": [
+          "Peptide"
+        ],
+        "properties": {
+"name": "Peptide",
+"indexes": [],
+"constraints": [
+            "Constraint( id=49, name='constraint_479d8ae4', type='UNIQUENESS', schema=(:Peptide {id}), ownedIndex=48 )"
+          ]
+        }
+      },
+      {
+        "identity": -21,
+        "labels": [
+          "Food"
+        ],
+        "properties": {
+"name": "Food",
+"indexes": [],
+"constraints": [
+            "Constraint( id=61, name='constraint_83b99e4b', type='UNIQUENESS', schema=(:Food {id}), ownedIndex=60 )"
+          ]
+        }
+      },
+      {
+        "identity": -5,
+        "labels": [
+          "Cellular_component"
+        ],
+        "properties": {
+"name": "Cellular_component",
+"indexes": [
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=14, name='constraint_2b69b7da', type='UNIQUENESS', schema=(:Cellular_component {id}), ownedIndex=13 )"
+          ]
+        }
+      },
+      {
+        "identity": -20,
+        "labels": [
+          "Drug"
+        ],
+        "properties": {
+"name": "Drug",
+"indexes": [],
+"constraints": [
+            "Constraint( id=59, name='constraint_bbb4a8c0', type='UNIQUENESS', schema=(:Drug {name}), ownedIndex=58 )",
+            "Constraint( id=57, name='constraint_18493ef5', type='UNIQUENESS', schema=(:Drug {id}), ownedIndex=56 )"
+          ]
+        }
+      },
+      {
+        "identity": -14,
+        "labels": [
+          "Transcript"
+        ],
+        "properties": {
+"name": "Transcript",
+"indexes": [],
+"constraints": [
+            "Constraint( id=41, name='constraint_e937e954', type='UNIQUENESS', schema=(:Transcript {id}), ownedIndex=40 )"
+          ]
+        }
+      },
+      {
+        "identity": -9,
+        "labels": [
+          "Experiment"
+        ],
+        "properties": {
+"name": "Experiment",
+"indexes": [
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=26, name='constraint_34c795be', type='UNIQUENESS', schema=(:Experiment {id}), ownedIndex=25 )"
+          ]
+        }
+      },
+      {
+        "identity": -12,
+        "labels": [
+          "Chromosome"
+        ],
+        "properties": {
+"name": "Chromosome",
+"indexes": [],
+"constraints": [
+            "Constraint( id=35, name='constraint_559a64ca', type='UNIQUENESS', schema=(:Chromosome {id}), ownedIndex=34 )"
+          ]
+        }
+      },
+      {
+        "identity": -24,
+        "labels": [
+          "Publication"
+        ],
+        "properties": {
+"name": "Publication",
+"indexes": [],
+"constraints": [
+            "Constraint( id=69, name='constraint_4e95c18c', type='UNIQUENESS', schema=(:Publication {id}), ownedIndex=68 )"
+          ]
+        }
+      },
+      {
+        "identity": -4,
+        "labels": [
+          "Molecular_function"
+        ],
+        "properties": {
+"name": "Molecular_function",
+"indexes": [
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=11, name='constraint_3fd28df4', type='UNIQUENESS', schema=(:Molecular_function {id}), ownedIndex=10 )"
+          ]
+        }
+      },
+      {
+        "identity": -11,
+        "labels": [
+          "Units"
+        ],
+        "properties": {
+"name": "Units",
+"indexes": [
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=32, name='constraint_e925a332', type='UNIQUENESS', schema=(:Units {id}), ownedIndex=31 )"
+          ]
+        }
+      },
+      {
+        "identity": -15,
+        "labels": [
+          "Protein"
+        ],
+        "properties": {
+"name": "Protein",
+"indexes": [
+            "name",
+            "accession"
+          ],
+"constraints": [
+            "Constraint( id=45, name='constraint_9e3db602', type='UNIQUENESS', schema=(:Protein {id}), ownedIndex=44 )"
+          ]
+        }
+      },
+      {
+        "identity": -32,
+        "labels": [
+          "Subject"
+        ],
+        "properties": {
+"name": "Subject",
+"indexes": [],
+"constraints": [
+            "Constraint( id=93, name='constraint_8dfdb0ae', type='UNIQUENESS', schema=(:Subject {id}), ownedIndex=92 )"
+          ]
+        }
+      },
+      {
+        "identity": -22,
+        "labels": [
+          "Known_variant"
+        ],
+        "properties": {
+"name": "Known_variant",
+"indexes": [
+            "pvariant_id",
+            "external_id"
+          ],
+"constraints": [
+            "Constraint( id=63, name='constraint_635475f8', type='UNIQUENESS', schema=(:Known_variant {id}), ownedIndex=62 )"
+          ]
+        }
+      },
+      {
+        "identity": -31,
+        "labels": [
+          "Project"
+        ],
+        "properties": {
+"name": "Project",
+"indexes": [],
+"constraints": [
+            "Constraint( id=91, name='constraint_6c007901', type='UNIQUENESS', schema=(:Project {name}), ownedIndex=90 )",
+            "Constraint( id=89, name='constraint_b647261a', type='UNIQUENESS', schema=(:Project {id}), ownedIndex=88 )"
+          ]
+        }
+      },
+      {
+        "identity": -8,
+        "labels": [
+          "Phenotype"
+        ],
+        "properties": {
+"name": "Phenotype",
+"indexes": [
+            "name"
+          ],
+"constraints": [
+            "Constraint( id=23, name='constraint_36e9c4e7', type='UNIQUENESS', schema=(:Phenotype {id}), ownedIndex=22 )"
+          ]
+        }
+      },
+      {
+        "identity": -28,
+        "labels": [
+          "GWAS_study"
+        ],
+        "properties": {
+"name": "GWAS_study",
+"indexes": [],
+"constraints": [
+            "Constraint( id=77, name='constraint_769b6ebf', type='UNIQUENESS', schema=(:GWAS_study {id}), ownedIndex=76 )"
+          ]
+        }
+      },
+      {
+        "identity": -16,
+        "labels": [
+          "Amino_acid_sequence"
+        ],
+        "properties": {
+"name": "Amino_acid_sequence",
+"indexes": [],
+"constraints": [
+            "Constraint( id=47, name='constraint_972bcc17', type='UNIQUENESS', schema=(:Amino_acid_sequence {id}), ownedIndex=46 )"
+          ]
+        }
+      },
+      {
+        "identity": -34,
+        "labels": [
+          "Analytical_sample"
+        ],
+        "properties": {
+"name": "Analytical_sample",
+"indexes": [
+            "group"
+          ],
+"constraints": [
+            "Constraint( id=98, name='constraint_5da9ba9c', type='UNIQUENESS', schema=(:Analytical_sample {id}), ownedIndex=97 )"
+          ]
+        }
+      },
+      {
+        "identity": -18,
+        "labels": [
+          "Modified_protein"
+        ],
+        "properties": {
+"name": "Modified_protein",
+"indexes": [],
+"constraints": [
+            "Constraint( id=51, name='constraint_a710bbd4', type='UNIQUENESS', schema=(:Modified_protein {id}), ownedIndex=50 )"
+          ]
+        }
+      },
+      {
+        "identity": -33,
+        "labels": [
+          "Biological_sample"
+        ],
+        "properties": {
+"name": "Biological_sample",
+"indexes": [],
+"constraints": [
+            "Constraint( id=95, name='constraint_442fc91c', type='UNIQUENESS', schema=(:Biological_sample {id}), ownedIndex=94 )"
+          ]
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "identity": -146,
+        "start": -22,
+        "end": -15,
+        "type": "CURATED_AFFECTS_INTERACTION_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -103,
+        "start": -14,
+        "end": -12,
+        "type": "LOCATED_IN",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -143,
+        "start": -22,
+        "end": -12,
+        "type": "VARIANT_FOUND_IN_CHROMOSOME",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -151,
+        "start": -5,
+        "end": -24,
+        "type": "MENTIONED_IN_PUBLICATION",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -150,
+        "start": -2,
+        "end": -24,
+        "type": "MENTIONED_IN_PUBLICATION",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -153,
+        "start": -18,
+        "end": -24,
+        "type": "MENTIONED_IN_PUBLICATION",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -154,
+        "start": -25,
+        "end": -24,
+        "type": "MENTIONED_IN_PUBLICATION",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -149,
+        "start": -1,
+        "end": -24,
+        "type": "MENTIONED_IN_PUBLICATION",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -152,
+        "start": -15,
+        "end": -24,
+        "type": "MENTIONED_IN_PUBLICATION",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -158,
+        "start": -28,
+        "end": -10,
+        "type": "STUDIES_TRAIT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -159,
+        "start": -15,
+        "end": -29,
+        "type": "ANNOTATED_IN_PATHWAY",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -160,
+        "start": -26,
+        "end": -29,
+        "type": "ANNOTATED_IN_PATHWAY",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -168,
+        "start": -33,
+        "end": -34,
+        "type": "SPLITTED_INTO",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -145,
+        "start": -22,
+        "end": -15,
+        "type": "VARIANT_FOUND_IN_PROTEIN",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -141,
+        "start": -15,
+        "end": -1,
+        "type": "IS_BIOMARKER_OF_DISEASE",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -148,
+        "start": -15,
+        "end": -1,
+        "type": "DETECTED_IN_PATHOLOGY_SAMPLE",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -104,
+        "start": -13,
+        "end": -14,
+        "type": "TRANSCRIBED_INTO",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -157,
+        "start": -22,
+        "end": -28,
+        "type": "VARIANT_FOUND_IN_GWAS",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -166,
+        "start": -31,
+        "end": -32,
+        "type": "HAS_ENROLLED",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -133,
+        "start": -18,
+        "end": -6,
+        "type": "HAS_MODIFICATION",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -101,
+        "start": -10,
+        "end": -1,
+        "type": "MAPS_TO",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -102,
+        "start": -10,
+        "end": -8,
+        "type": "MAPS_TO",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -164,
+        "start": -30,
+        "end": -31,
+        "type": "IS_RESPONSIBLE",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -156,
+        "start": -15,
+        "end": -27,
+        "type": "HAS_STRUCTURE",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -169,
+        "start": -34,
+        "end": -15,
+        "type": "HAS_QUANTIFIED_PROTEIN",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -138,
+        "start": -15,
+        "end": -15,
+        "type": "CURATED_INTERACTS_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -161,
+        "start": -28,
+        "end": -24,
+        "type": "PUBLISHED_IN",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -147,
+        "start": -22,
+        "end": -23,
+        "type": "VARIANT_IS_CLINICALLY_RELEVANT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -163,
+        "start": -31,
+        "end": -2,
+        "type": "STUDIES_TISSUE",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -170,
+        "start": -34,
+        "end": -18,
+        "type": "HAS_QUANTIFIED_MODIFIED_PROTEIN",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -137,
+        "start": -15,
+        "end": -19,
+        "type": "IS_SUBUNIT_OF",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -142,
+        "start": -15,
+        "end": -2,
+        "type": "IS_QCMARKER_IN_TISSUE",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -136,
+        "start": -18,
+        "end": -15,
+        "type": "IS_SUBSTRATE_OF",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -135,
+        "start": -17,
+        "end": -18,
+        "type": "HAS_MODIFIED_SITE",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -134,
+        "start": -15,
+        "end": -18,
+        "type": "HAS_MODIFIED_SITE",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -126,
+        "start": -23,
+        "end": -15,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -119,
+        "start": -19,
+        "end": -5,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -124,
+        "start": -23,
+        "end": -4,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -127,
+        "start": -26,
+        "end": -1,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -116,
+        "start": -19,
+        "end": -2,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -114,
+        "start": -15,
+        "end": -15,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -123,
+        "start": -23,
+        "end": -3,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -112,
+        "start": -15,
+        "end": -4,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -131,
+        "start": -26,
+        "end": -5,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -118,
+        "start": -19,
+        "end": -4,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -121,
+        "start": -23,
+        "end": -1,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -110,
+        "start": -15,
+        "end": -2,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -113,
+        "start": -15,
+        "end": -5,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -115,
+        "start": -19,
+        "end": -1,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -130,
+        "start": -26,
+        "end": -4,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -109,
+        "start": -15,
+        "end": -1,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -122,
+        "start": -23,
+        "end": -2,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -128,
+        "start": -26,
+        "end": -2,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -111,
+        "start": -15,
+        "end": -3,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -120,
+        "start": -19,
+        "end": -15,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -125,
+        "start": -23,
+        "end": -5,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -129,
+        "start": -26,
+        "end": -3,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -132,
+        "start": -26,
+        "end": -15,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -117,
+        "start": -19,
+        "end": -3,
+        "type": "ASSOCIATED_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -162,
+        "start": -31,
+        "end": -1,
+        "type": "STUDIES_DISEASE",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -140,
+        "start": -15,
+        "end": -15,
+        "type": "ACTS_ON",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -144,
+        "start": -22,
+        "end": -13,
+        "type": "VARIANT_FOUND_IN_GENE",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -108,
+        "start": -14,
+        "end": -15,
+        "type": "TRANSLATED_INTO",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -107,
+        "start": -13,
+        "end": -15,
+        "type": "TRANSLATED_INTO",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -105,
+        "start": -15,
+        "end": -16,
+        "type": "HAS_SEQUENCE",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -167,
+        "start": -33,
+        "end": -32,
+        "type": "BELONGS_TO_SUBJECT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -155,
+        "start": -25,
+        "end": -15,
+        "type": "FOUND_IN_PROTEIN",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -89,
+        "start": -10,
+        "end": -10,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -98,
+        "start": -11,
+        "end": -9,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -2,
+        "start": -1,
+        "end": -2,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -71,
+        "start": -9,
+        "end": -1,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -18,
+        "start": -2,
+        "end": -9,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -54,
+        "start": -6,
+        "end": -4,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -16,
+        "start": -2,
+        "end": -6,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -39,
+        "start": -4,
+        "end": -10,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -38,
+        "start": -4,
+        "end": -9,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -51,
+        "start": -6,
+        "end": -1,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -14,
+        "start": -2,
+        "end": -4,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -49,
+        "start": -5,
+        "end": -10,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -63,
+        "start": -8,
+        "end": -3,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -36,
+        "start": -4,
+        "end": -6,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -56,
+        "start": -6,
+        "end": -6,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -19,
+        "start": -2,
+        "end": -10,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -83,
+        "start": -10,
+        "end": -3,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -65,
+        "start": -8,
+        "end": -5,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -1,
+        "start": -1,
+        "end": -1,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -52,
+        "start": -6,
+        "end": -2,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -11,
+        "start": -2,
+        "end": -1,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -69,
+        "start": -8,
+        "end": -10,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -68,
+        "start": -8,
+        "end": -9,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -86,
+        "start": -10,
+        "end": -6,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -70,
+        "start": -8,
+        "end": -11,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -25,
+        "start": -3,
+        "end": -5,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -55,
+        "start": -6,
+        "end": -5,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -67,
+        "start": -8,
+        "end": -8,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -62,
+        "start": -8,
+        "end": -2,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -79,
+        "start": -9,
+        "end": -10,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -61,
+        "start": -8,
+        "end": -1,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -45,
+        "start": -5,
+        "end": -5,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -74,
+        "start": -9,
+        "end": -4,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -77,
+        "start": -9,
+        "end": -8,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -17,
+        "start": -2,
+        "end": -8,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -44,
+        "start": -5,
+        "end": -4,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -24,
+        "start": -3,
+        "end": -4,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -21,
+        "start": -3,
+        "end": -1,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -20,
+        "start": -2,
+        "end": -11,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -88,
+        "start": -10,
+        "end": -9,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -58,
+        "start": -6,
+        "end": -9,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -30,
+        "start": -3,
+        "end": -11,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -9,
+        "start": -1,
+        "end": -10,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -73,
+        "start": -9,
+        "end": -3,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -34,
+        "start": -4,
+        "end": -4,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -41,
+        "start": -5,
+        "end": -1,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -8,
+        "start": -1,
+        "end": -9,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -75,
+        "start": -9,
+        "end": -5,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -12,
+        "start": -2,
+        "end": -2,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -57,
+        "start": -6,
+        "end": -8,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -76,
+        "start": -9,
+        "end": -6,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -23,
+        "start": -3,
+        "end": -3,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -60,
+        "start": -6,
+        "end": -11,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -93,
+        "start": -11,
+        "end": -3,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -15,
+        "start": -2,
+        "end": -5,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -92,
+        "start": -11,
+        "end": -2,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -95,
+        "start": -11,
+        "end": -5,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -4,
+        "start": -1,
+        "end": -4,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -22,
+        "start": -3,
+        "end": -2,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -59,
+        "start": -6,
+        "end": -10,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -91,
+        "start": -11,
+        "end": -1,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -94,
+        "start": -11,
+        "end": -4,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -87,
+        "start": -10,
+        "end": -8,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -43,
+        "start": -5,
+        "end": -3,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -10,
+        "start": -1,
+        "end": -11,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -85,
+        "start": -10,
+        "end": -5,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -78,
+        "start": -9,
+        "end": -9,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -31,
+        "start": -4,
+        "end": -1,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -35,
+        "start": -4,
+        "end": -5,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -64,
+        "start": -8,
+        "end": -4,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -80,
+        "start": -9,
+        "end": -11,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -13,
+        "start": -2,
+        "end": -3,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -40,
+        "start": -4,
+        "end": -11,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -46,
+        "start": -5,
+        "end": -6,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -32,
+        "start": -4,
+        "end": -2,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -27,
+        "start": -3,
+        "end": -8,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -72,
+        "start": -9,
+        "end": -2,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -97,
+        "start": -11,
+        "end": -8,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -5,
+        "start": -1,
+        "end": -5,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -48,
+        "start": -5,
+        "end": -9,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -26,
+        "start": -3,
+        "end": -6,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -33,
+        "start": -4,
+        "end": -3,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -84,
+        "start": -10,
+        "end": -4,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -50,
+        "start": -5,
+        "end": -11,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -96,
+        "start": -11,
+        "end": -6,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -7,
+        "start": -1,
+        "end": -8,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -81,
+        "start": -10,
+        "end": -1,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -99,
+        "start": -11,
+        "end": -10,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -6,
+        "start": -1,
+        "end": -6,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -47,
+        "start": -5,
+        "end": -8,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -29,
+        "start": -3,
+        "end": -10,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -42,
+        "start": -5,
+        "end": -2,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -53,
+        "start": -6,
+        "end": -3,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -28,
+        "start": -3,
+        "end": -9,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -90,
+        "start": -10,
+        "end": -11,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -100,
+        "start": -11,
+        "end": -11,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -37,
+        "start": -4,
+        "end": -8,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -3,
+        "start": -1,
+        "end": -3,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -66,
+        "start": -8,
+        "end": -6,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -82,
+        "start": -10,
+        "end": -2,
+        "type": "HAS_PARENT",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -139,
+        "start": -15,
+        "end": -15,
+        "type": "COMPILED_INTERACTS_WITH",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -106,
+        "start": -17,
+        "end": -15,
+        "type": "BELONGS_TO_PROTEIN",
+        "properties": {
+
+        }
+      },
+      {
+        "identity": -165,
+        "start": -30,
+        "end": -31,
+        "type": "PARTICIPATES_IN",
+        "properties": {
+
+        }
+      }
+    ]
+  }
+]
