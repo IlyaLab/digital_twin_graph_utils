@@ -90,7 +90,7 @@ def import_csv(csv_filename, edges_to_include=None, remove_unused_nodes=False):
     return nodes, edges, node_types, edge_types
 
 # TODO: multiple edges between two nodes?
-def import_jsonl(filename, edges_to_include=None, remove_unused_nodes=True):
+def import_jsonl(filename, edges_to_include=None, remove_unused_nodes=True, use_edge_types=True, use_node_types=True):
     """
     Imports a jsonl file.
     Args:
@@ -139,11 +139,14 @@ def import_jsonl(filename, edges_to_include=None, remove_unused_nodes=True):
             else:
                 row_name = ''
             row_label = row['labels'][0]
-            if row_label in node_types:
-                nodes.append((int(row['id']), row_name, node_types[row_label]))
+            if use_node_types:
+                if row_label in node_types:
+                    nodes.append((int(row['id']), row_name, node_types[row_label]))
+                else:
+                    nodes.append((int(row['id']), row_name, len(node_types) + 1))
+                    node_types[row_label] = len(node_types) + 1
             else:
-                nodes.append((int(row['id']), row_name, len(node_types) + 1))
-                node_types[row_label] = len(node_types) + 1
+                nodes.append((int(row['id']), row_name, True))
             node_index[int(row['id'])] = n_nodes 
             n_nodes += 1
         # if this row is an edge
@@ -154,11 +157,14 @@ def import_jsonl(filename, edges_to_include=None, remove_unused_nodes=True):
                 node2 = int(row['end']['id'])
                 node_has_edge.add(node1)
                 node_has_edge.add(node2)
-                if edge_type in edge_types:
-                    edges[(node1, node2)] = edge_types[edge_type]
+                if use_edge_types:
+                    if edge_type in edge_types:
+                        edges[(node1, node2)] = edge_types[edge_type]
+                    else:
+                        edges[(node1, node2)] = len(edge_types) + 1
+                        edge_types[edge_type] = len(edge_types) + 1
                 else:
-                    edges[(node1, node2)] = len(edge_types) + 1
-                    edge_types[edge_type] = len(edge_types) + 1
+                    edges[(node1, node2)] = True
         line = f.readline()
         i += 1
     if remove_unused_nodes:
@@ -201,11 +207,11 @@ def to_sparse(nodes, edges):
     return edge_matrix
 
 
-def load_spoke(filename='spoke.csv', edges_to_include=None, remove_unused_nodes=False, mtx_filename='spoke.mtx'):
+def load_spoke(filename='spoke.csv', edges_to_include=None, remove_unused_nodes=False, mtx_filename='spoke.mtx', **kwargs):
     if filename.endswith('.csv') or filename.endswith('.csv.gz'):
-        nodes, edges, node_types, edge_types = import_csv(filename, edges_to_include, remove_unused_nodes)
+        nodes, edges, node_types, edge_types = import_csv(filename, edges_to_include, remove_unused_nodes, **kwargs)
     elif filename.endswith('.json') or filename.endswith('.json.gz') or filename.endswith('.jsonl') or filename.endswith('.jsonl.gz'):
-        nodes, edges, node_types, edge_types = import_jsonl(filename, edges_to_include, remove_unused_nodes)
+        nodes, edges, node_types, edge_types = import_jsonl(filename, edges_to_include, remove_unused_nodes, **kwargs)
     if not os.path.exists(mtx_filename):
         edge_matrix = to_sparse(nodes, edges)
         io.mmwrite(mtx_filename, edge_matrix)
