@@ -5,6 +5,7 @@ import gzip
 import json
 import os
 
+import numpy as np
 from scipy import sparse, io
 
 
@@ -184,6 +185,100 @@ def import_jsonl(filename, edges_to_include=None, remove_unused_nodes=True, use_
     node_types = {v: k for k, v in node_types.items()}
     edge_types = {v: k for k, v in edge_types.items()}
     return nodes, edges, node_types, edge_types
+
+def import_ckg(filename, edges_to_include=None, remove_unused_nodes=False, use_edge_types=True, use_node_types=True, n_edges=300000000, n_nodes=20000000):
+    """
+    Imports a jsonl file.
+    This tries to be less memory-intensive than the other import procedure.
+    Args:
+        filename: name of jsonl file
+        edges_to_include: set of edge types
+        remove_unused_nodes: True if nodes with no in- or out-edges are to be removed.
+        n_edges: An upper bound on the number of edges (does not have to be exact, but should be greater than the actual number of edges)
+
+    Returns:
+        nodes: list of (_id, _name, _labels_id) where _labels_id corresponds to a key in node_types
+        edges: COO array
+        node_types: dict of int: str (_labels)
+        edge_types: dict of int: str (_type)
+    """
+    nodes = []
+    n_nodes = 0
+    # mapping of _id to index in nodes
+    node_index = {}
+    # node_types is a map of string (
+    node_types = {}
+    edges_start = np.zeros(n_edges, dtype=np.int64)
+    edges_end = np.zeros(n_edges, dtype=np.int64)
+    edges_values = np.zeros(n_edges, dtype=np.uint8)
+    # edge_types is a map of string (_type) to node
+    edge_types = {}
+    # sets of nodes that have in-edges or out-edges (to use when deciding whether to remove nodes)
+    if filename.endswith('.gz'):
+        # handle gzip
+        f = gzip.open(filename, 'rt')
+    else:
+        f = open(filename)
+    line = f.readline()
+    i = 0
+    # ne is number of current edges
+    ne = 0
+    while line:
+        row = json.loads(line)
+        if i % 10000 == 0:
+            print(i, 'nodes: ', len(node_index), 'edges: ', ne)
+        # if this is a node
+        if row['type'] == 'node':
+            if 'name' in row['properties'] and row['properties']['name'] != '':
+                row_name = row['properties']['name']
+            elif 'pref_name' in row['properties'] and row['properties']['pref_name'] != '':
+                row_name = row['properties']['pref_name']
+            elif 'identifier' in row['properties'] and row['properties']['identifier'] != '':
+                row_name = row['properties']['identifier']
+            elif 'id' in row['properties'] and row['properties']['id']:
+                row_name = row['properties']['id']
+            else:
+                row_name = ''
+            row_label = row['labels'][0]
+            if use_node_types:
+                if row_label in node_types:
+                    nodes.append((int(row['id']), row_name, node_types[row_label]))
+                else:
+                    nodes.append((int(row['id']), row_name, len(node_types) + 1))
+                    node_types[row_label] = len(node_types) + 1
+            else:
+                nodes.append((int(row['id']), row_name, True))
+            node_index[int(row['id'])] = n_nodes 
+            n_nodes += 1
+        # if this row is an edge
+        # in neo4j exports, edges always come after nodes.
+        # assumption: there are less than 255 edge types
+        else:
+            edge_type = row['label']
+            if edges_to_include is None or edge_type in edges_to_include:
+                node1 = node_index[int(row['start']['id'])]
+                node2 = node_index[int(row['end']['id'])]
+                edges_start[ne] = node1
+                edges_end[ne] = node2
+                if use_edge_types:
+                    if edge_type in edge_types:
+                        edges_values[ne] = edge_types[edge_type]
+                    else:
+                        edges_values[ne] = len(edge_types) + 1
+                        edge_types[edge_type] = len(edge_types) + 1
+                else:
+                    edges_values[ne] = 1
+                ne += 1
+        line = f.readline()
+        i += 1
+    edges_values = edges_values[:ne]
+    edges_start = edges_start[:ne]
+    edges_end = edges_end[:ne]
+    edges = sparse.coo_array((edges_values, (edges_start, edges_end)), shape=(len(nodes), len(nodes)))
+    node_types = {v: k for k, v in node_types.items()}
+    edge_types = {v: k for k, v in edge_types.items()}
+    return nodes, edges, node_types, edge_types
+
 
 
 
