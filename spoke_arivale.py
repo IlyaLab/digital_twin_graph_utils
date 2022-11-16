@@ -22,7 +22,7 @@ def get_protein_names(tx, uniprot_ids):
     """
     id_names = []
     for uniprot in uniprot_ids:
-        result = tx.run('MATCH (n:Protein) WHERE n.identifier=$id RETURN ID(n), n.name', id=uniprot)
+        result = tx.run('MATCH (n:Protein) WHERE n.identifier=$id RETURN ID(n), n.name', id=uniprot.strip())
         id_names.append((uniprot, result.single()))
     return id_names
 
@@ -32,7 +32,7 @@ def get_compound_names(tx, pubchem_chembl_ids):
     """
     id_names = []
     for pubchem, chembl in pubchem_chembl_ids.items():
-        result = tx.run('MATCH (n:Compound) WHERE n.identifier=$id RETURN ID(n), n.name', id=chembl)
+        result = tx.run('MATCH (n:Compound) WHERE n.identifier=$id RETURN ID(n), n.name', id=chembl.strip())
         id_names.append((pubchem, result.single()))
     return id_names
 
@@ -71,6 +71,3 @@ if __name__ == '__main__':
     protein_psevs = generate_psevs(g, edge_matrix, protein_ids)
     np.savetxt('arivale_metabolite_psevs.txt', np.vstack(metabolite_psevs))
     np.savetxt('arivale_protein_psevs.txt', np.vstack(protein_psevs))
-
-
-
