@@ -23,6 +23,8 @@ def get_protein_names(tx, uniprot_ids):
     """
     id_names = []
     for uniprot in uniprot_ids:
+        if ',' in uniprot:
+            uniprot = uniprot.split(',')[0]
         result = tx.run('MATCH (n:Protein) WHERE n.identifier=$id RETURN ID(n), n.name', id=uniprot.strip())
         id_names.append((uniprot, result.single()))
     return id_names
@@ -52,6 +54,7 @@ if __name__ == '__main__':
         pubchem_to_chembl = json.load(f)
     with open('../arivale_utils/arivale_uniprot.txt') as f:
         uniprot_ids = [x.strip() for x in f.readlines()]
+
     # 2. get graph node IDs...
     with driver.session() as session:
         protein_name_ids = session.execute_read(get_protein_names, uniprot_ids)
@@ -60,6 +63,12 @@ if __name__ == '__main__':
     metabolite_name_ids = [x for x in metabolite_name_ids if x[1] is not None]
     pubchem_to_spoke = {x[0]: x[1] for x in metabolite_name_ids}
     uniprot_to_spoke = {x[0]: x[1] for x in protein_name_ids}
+
+    # save protein and metabolite refs
+    with open('arivale_metabolites.json', 'w') as f:
+        json.dump(metabolite_name_ids, f, indent=1)
+    with open('arivale_proteins.json', 'w') as f:
+        json.dump(protein_name_ids, f, indent=1)
 
     # update arivale_mets.xlsx, arivale_prots.xlsx
     arivale_mets = pd.read_excel('../arivale_utils/arivale_mets.xlsx')
@@ -103,18 +112,25 @@ if __name__ == '__main__':
     new_prots = pd.DataFrame(new_prots)
     new_prots.to_csv('../arivale_utils/arivale_prots.tsv', index=None, sep='\t')
 
-    # save output
-    with open('arivale_metabolites.json', 'w') as f:
-        json.dump(metabolite_name_ids, f, indent=1)
-    with open('arivale_proteins.json', 'w') as f:
-        json.dump(protein_name_ids, f, indent=1)
     # 3. load KG, map proteins and metabolites to KG nodes
     nodes, edges, node_types, edge_types, edge_matrix = spoke_loader.load_spoke('spoke_2021.jsonl.gz', remove_unused_nodes=True, mtx_filename='spoke_2021.mtx')
     g = graph.Graph(nodes, edges, node_types, edge_types, edge_matrix)
+
     # 4. generate PSEVs for these node IDs
     metabolite_ids = [int(x[1][0]) for x in metabolite_name_ids]
     #protein_ids = [int(x[1][0]) for x in protein_name_ids]
-    metabolite_psevs = generate_psevs(g, edge_matrix, metabolite_ids)
+    metabolite_psevs = []
+    metabolite_node_ids = []
+    for n in metabolite_ids:
+        try:
+            topics = g.get_indices_from_ids([n])
+            pr_probs_topic = pagerank_sparse.topic_pagerank(edge_matrix, topics, modify_matrix=False, resid=0.85, topic_prob=0.15, n_iters=50)
+            metabolite_psevs.append(pr_probs_topic)
+            metabolite_node_ids.append(n)
+        except:
+            pass
+    #metabolite_psevs = generate_psevs(g, edge_matrix, metabolite_ids)
     #protein_psevs = generate_psevs(g, edge_matrix, protein_ids)
     np.savetxt('arivale_metabolite_psevs.txt', np.vstack(metabolite_psevs))
+    np.savetxt('arivale_metabolite_spoke_node_ids.txt', np.array(metabolite_node_ids), fmt='%d')
     #np.savetxt('arivale_protein_psevs.txt', np.vstack(protein_psevs))
