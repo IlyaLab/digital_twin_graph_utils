@@ -9,6 +9,7 @@ import json
 
 from neo4j import GraphDatabase
 import numpy as np
+import pandas as pd
 
 import spoke_loader
 import pagerank_sparse
@@ -32,8 +33,9 @@ def get_compound_names(tx, pubchem_chembl_ids):
     """
     id_names = []
     for pubchem, chembl in pubchem_chembl_ids.items():
-        result = tx.run('MATCH (n:Compound) WHERE n.identifier=$id RETURN ID(n), n.name', id=chembl.strip())
+        result = tx.run('MATCH (n:Compound) WHERE n.identifier=$id RETURN ID(n), n.pref_name', id=chembl.strip())
         id_names.append((pubchem, result.single()))
+        print(id_names[-1])
     return id_names
 
 def generate_psevs(g, edge_matrix, node_ids):
@@ -56,18 +58,63 @@ if __name__ == '__main__':
         metabolite_name_ids = session.execute_read(get_compound_names, pubchem_to_chembl)
     protein_name_ids = [x for x in protein_name_ids if x[1] is not None]
     metabolite_name_ids = [x for x in metabolite_name_ids if x[1] is not None]
+    pubchem_to_spoke = {x[0]: x[1] for x in metabolite_name_ids}
+    uniprot_to_spoke = {x[0]: x[1] for x in protein_name_ids}
+
+    # update arivale_mets.xlsx, arivale_prots.xlsx
+    arivale_mets = pd.read_excel('../arivale_utils/arivale_mets.xlsx')
+    arivale_prots = pd.read_excel('../arivale_utils/arivale_prots.xlsx')
+    new_mets = []
+    for row in arivale_mets.iterrows():
+        row = row[1].copy()
+        if np.isnan(row['PUBCHEM']):
+            row['CHEMBL'] = ''
+            row['IN_SPOKE'] = 0
+            row['SPOKE_ID'] = -1
+            new_mets.append(row)
+            continue
+        pubchem_id = str(int(row['PUBCHEM']))
+        if row['PUBCHEM'] and pubchem_id in pubchem_to_chembl:
+            row['CHEMBL'] = pubchem_to_chembl[pubchem_id].strip()
+            if pubchem_id in pubchem_to_spoke:
+                row['IN_SPOKE'] = 1
+                row['SPOKE_ID'] = pubchem_to_spoke[pubchem_id][0]
+            else:
+                row['IN_SPOKE'] = 0
+                row['SPOKE_ID'] = -1
+        else:
+            row['CHEMBL'] = ''
+            row['IN_SPOKE'] = 0
+            row['SPOKE_ID'] = -1
+        new_mets.append(row)
+    new_mets = pd.DataFrame(new_mets)
+    new_mets.to_csv('../arivale_utils/arivale_mets.tsv', index=None, sep='\t')
+    new_prots = []
+    for row in arivale_prots.iterrows():
+        row = row[1].copy()
+        uniprot_id = str(row['uniprot'])
+        if uniprot_id and uniprot_id in uniprot_to_spoke:
+            row['IN_SPOKE'] = 1
+            row['SPOKE_ID'] = uniprot_to_spoke[uniprot_id][0]
+        else:
+            row['IN_SPOKE'] = 0
+            row['SPOKE_ID'] = -1
+        new_prots.append(row)
+    new_prots = pd.DataFrame(new_prots)
+    new_prots.to_csv('../arivale_utils/arivale_prots.tsv', index=None, sep='\t')
+
     # save output
     with open('arivale_metabolites.json', 'w') as f:
-        json.dump(metabolite_name_ids, f)
+        json.dump(metabolite_name_ids, f, indent=1)
     with open('arivale_proteins.json', 'w') as f:
-        json.dump(protein_name_ids, f)
+        json.dump(protein_name_ids, f, indent=1)
     # 3. load KG, map proteins and metabolites to KG nodes
     nodes, edges, node_types, edge_types, edge_matrix = spoke_loader.load_spoke('spoke_2021.jsonl.gz', remove_unused_nodes=True, mtx_filename='spoke_2021.mtx')
     g = graph.Graph(nodes, edges, node_types, edge_types, edge_matrix)
     # 4. generate PSEVs for these node IDs
     metabolite_ids = [int(x[1][0]) for x in metabolite_name_ids]
-    protein_ids = [int(x[1][0]) for x in protein_name_ids]
+    #protein_ids = [int(x[1][0]) for x in protein_name_ids]
     metabolite_psevs = generate_psevs(g, edge_matrix, metabolite_ids)
-    protein_psevs = generate_psevs(g, edge_matrix, protein_ids)
+    #protein_psevs = generate_psevs(g, edge_matrix, protein_ids)
     np.savetxt('arivale_metabolite_psevs.txt', np.vstack(metabolite_psevs))
-    np.savetxt('arivale_protein_psevs.txt', np.vstack(protein_psevs))
+    #np.savetxt('arivale_protein_psevs.txt', np.vstack(protein_psevs))
