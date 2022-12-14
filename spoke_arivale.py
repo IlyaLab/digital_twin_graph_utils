@@ -113,24 +113,38 @@ if __name__ == '__main__':
     new_prots.to_csv('../arivale_utils/arivale_prots.tsv', index=None, sep='\t')
 
     # 3. load KG, map proteins and metabolites to KG nodes
-    nodes, edges, node_types, edge_types, edge_matrix = spoke_loader.load_spoke('spoke_2021.jsonl.gz', remove_unused_nodes=True, mtx_filename='spoke_2021.mtx')
+    nodes, edges, node_types, edge_types, edge_matrix = spoke_loader.load_spoke('spoke_2021.jsonl.gz', remove_unused_nodes=True, mtx_filename='spoke_2021.mtx.gz')
     g = graph.Graph(nodes, edges, node_types, edge_types, edge_matrix)
 
     # 4. generate PSEVs for these node IDs
-    metabolite_ids = [int(x[1][0]) for x in metabolite_name_ids]
-    #protein_ids = [int(x[1][0]) for x in protein_name_ids]
     metabolite_psevs = []
     metabolite_node_ids = []
-    for n in metabolite_ids:
+    metabolite_name_ids_filtered = []
+    for x in metabolite_name_ids:
+        n = int(x[1][0])
         try:
             topics = g.get_indices_from_ids([n])
             pr_probs_topic = pagerank_sparse.topic_pagerank(edge_matrix, topics, modify_matrix=False, resid=0.85, topic_prob=0.15, n_iters=50)
+            np.savetxt('arivale_met_psevs/{0}.txt'.format(x[0]), pr_probs_topic)
             metabolite_psevs.append(pr_probs_topic)
             metabolite_node_ids.append(n)
+            metabolite_name_ids_filtered.append(x[0])
         except:
             pass
-    #metabolite_psevs = generate_psevs(g, edge_matrix, metabolite_ids)
-    #protein_psevs = generate_psevs(g, edge_matrix, protein_ids)
-    np.savetxt('arivale_metabolite_psevs.txt', np.vstack(metabolite_psevs))
-    np.savetxt('arivale_metabolite_spoke_node_ids.txt', np.array(metabolite_node_ids), fmt='%d')
-    #np.savetxt('arivale_protein_psevs.txt', np.vstack(protein_psevs))
+    #np.savetxt('arivale_metabolite_psev_ids.txt', np.array(metabolite_name_ids_filtered), fmt='%s')
+
+    protein_psevs = []
+    protein_node_ids = []
+    protein_name_ids_filtered = []
+    for x in protein_name_ids:
+        n = int(x[1][0])
+        try:
+            topics = g.get_indices_from_ids([n])
+            pr_probs_topic = pagerank_sparse.topic_pagerank(edge_matrix, topics, modify_matrix=False, resid=0.85, topic_prob=0.15, n_iters=50)
+            np.savetxt('arivale_prot_psevs/{0}.txt'.format(x[0]), pr_probs_topic)
+            protein_psevs.append(pr_probs_topic)
+            protein_node_ids.append(n)
+            protein_name_ids_filtered.append(x[0])
+        except:
+            pass
+    #np.savetxt('arivale_protein_psev_ids.txt', np.array(protein_name_ids_filtered), fmt='%s')
